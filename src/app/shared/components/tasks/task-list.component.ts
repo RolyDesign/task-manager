@@ -84,13 +84,15 @@ export class TaskListComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.tasks$.next(this.data.tasks!);
-      this.tasks$.pipe(takeUntilDestroyed(this.dr)).subscribe((tasks) => {
-        this.pendingTasks = tasks.filter((t) => t.status == 'Pendiente');
-        this.inProgressTasks = tasks.filter((t) => t.status == 'En progreso');
-        this.completedTasks = tasks.filter((t) => t.status == 'Completada');
-        this.approvedTasks = tasks.filter((t) => t.status == 'Aprobada');
-      });
     }
+  }
+  ngOnInit() {
+    this.tasks$.pipe(takeUntilDestroyed(this.dr)).subscribe((tasks) => {
+      this.pendingTasks = tasks.filter((t) => t.status == 'Pendiente');
+      this.inProgressTasks = tasks.filter((t) => t.status == 'En progreso');
+      this.completedTasks = tasks.filter((t) => t.status == 'Completada');
+      this.approvedTasks = tasks.filter((t) => t.status == 'Aprobada');
+    });
   }
 
   refreshData() {

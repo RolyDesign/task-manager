@@ -17,6 +17,7 @@ import {
   SimpleChanges,
   EventEmitter,
   ChangeDetectionStrategy,
+  DestroyRef,
 } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -37,6 +38,7 @@ import { SortComponent, StatusSort } from '../sort/sort.component';
 import { TaskCardComponent } from './task-card.component';
 import { TaskResolveData } from '../../../views/intranet/task/task.resolver';
 import { TaskCreateComponent } from '../../../views/intranet/task/modals/task-create.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-task-to-approve-list',
@@ -71,18 +73,21 @@ export class TaskToApproveListComponent implements OnChanges {
   searchValue = '';
   sortOrder: StatusSort = '';
   dialog = inject(MatDialog);
+  dr = inject(DestroyRef);
   @Input({ required: true }) data!: Partial<TaskResolveData>;
   @Output() totalToApprove = new EventEmitter<number>();
   @Output() onRefreshed = new EventEmitter();
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.tasks$.next(this.data.tasksSelfToApprove!);
-      this.tasks$.subscribe((tasks) => {
-        this.completedTasks = tasks.filter((t) => t.status == 'Completada');
-        this.approvedTasks = tasks.filter((t) => t.status == 'Aprobada');
-      });
       this.totalToApprove.emit(this.completedTasks.length);
     }
+  }
+  ngOnInit() {
+    this.tasks$.pipe(takeUntilDestroyed(this.dr)).subscribe((tasks) => {
+      this.completedTasks = tasks.filter((t) => t.status == 'Completada');
+      this.approvedTasks = tasks.filter((t) => t.status == 'Aprobada');
+    });
   }
   refreshData() {
     return this.taskService
