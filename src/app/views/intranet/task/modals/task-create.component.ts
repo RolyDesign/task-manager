@@ -90,7 +90,6 @@ export class TaskCreateComponent {
         ?.patchValue(adminselected?.name + ' ' + adminselected?.lastName);
     });
   }
-
   buildInitialsName(name: string, lastName: string) {
     return (
       name.trim().slice(0, 1).toUpperCase() +
@@ -115,7 +114,6 @@ export class TaskCreateComponent {
         this.submitting = false;
       });
   }
-
   get name() {
     return this.taskCreateForm.get('name');
   }
@@ -125,7 +123,6 @@ export class TaskCreateComponent {
   get status() {
     return this.taskCreateForm.get('status');
   }
-
   get approvedUserId() {
     return this.taskCreateForm.get('approvedUserId');
   }

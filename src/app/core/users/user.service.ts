@@ -72,20 +72,34 @@ export class UserService {
       })
       .pipe(
         catchError((e: HttpErrorResponse) => {
-          this.toastService.errorNotify(`Error obteniendo su perfil`);
+          this.toastService.errorNotify(`Error obteniendo lista de usuarios`);
           return throwError(() => e);
         })
       );
   }
   getUserByEmail$(email: string) {
-    return this.http.get<IUserGetDTO[]>(`${environment.API_URL}/users`, {
-      params: {
-        email,
-      },
-    });
+    return this.http
+      .get<IUserGetDTO[]>(`${environment.API_URL}/users`, {
+        params: {
+          email,
+        },
+      })
+      .pipe(
+        catchError((e: HttpErrorResponse) => {
+          this.toastService.errorNotify(`Error obteniendo usuario  ${email}`);
+          return throwError(() => e);
+        })
+      );
   }
   getUserById$(id: number) {
-    return this.http.get<IUserGetDTO>(`${environment.API_URL}/users/${id}`);
+    return this.http
+      .get<IUserGetDTO>(`${environment.API_URL}/users/${id}`)
+      .pipe(
+        catchError((e: HttpErrorResponse) => {
+          this.toastService.errorNotify(`Error obteniendo usuario  ${id}`);
+          return throwError(() => e);
+        })
+      );
   }
   getAdminUsers$() {
     return this.http
@@ -105,11 +119,8 @@ export class UserService {
     return this.http
       .get<IGetUserSelfDTO>(`${environment.API_URL}/users/${id}`)
       .pipe(
-        tap((user) => {
-          //this.userSelfStore.set(user);
-        }),
         catchError((e: HttpErrorResponse) => {
-          this.toastService.errorNotify(`Error obteniendo su perfil`);
+          this.toastService.errorNotify(`Error su usuario`);
           return throwError(() => e);
         })
       );

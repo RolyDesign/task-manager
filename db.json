@@ -257,17 +257,6 @@
       "approvedUserName": "Juan Paes",
       "creatorName": "Maria Perez",
       "id": 13
-    },
-    {
-      "name": "ghfgh",
-      "description": "fghgh",
-      "status": "Pendiente",
-      "userId": 3,
-      "approvedUserId": 2,
-      "initialsName": "JP",
-      "approvedUserName": "Maria Carla Perez",
-      "creatorName": "Juan Paes",
-      "id": 14
     }
   ]
 }

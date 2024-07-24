@@ -72,7 +72,6 @@ export class TaskEditModalComponent {
       adminUsers: Array<{ id: number; name: string; lastName: string }>;
     }
   ) {}
-
   ngOnInit() {
     const { task, user, adminUsers } = this.Data;
     this.taskEditForm = this.fb.group({
@@ -94,14 +93,12 @@ export class TaskEditModalComponent {
         ?.patchValue(adminselected?.name + ' ' + adminselected?.lastName);
     });
   }
-
   buildInitialsName(name: string, lastName: string) {
     return (
       name.trim().slice(0, 1).toUpperCase() +
       lastName.trim().slice(0, 1).toUpperCase()
     );
   }
-
   onEditTask() {
     this.submitting = true;
     const formValue = this.taskEditForm.value as ITaskCreateDTO;
@@ -120,7 +117,6 @@ export class TaskEditModalComponent {
         this.submitting = false;
       });
   }
-
   get name() {
     return this.taskEditForm.get('name');
   }
@@ -130,7 +126,6 @@ export class TaskEditModalComponent {
   get status() {
     return this.taskEditForm.get('status');
   }
-
   get approvedUserId() {
     return this.taskEditForm.get('approvedUserId');
   }
