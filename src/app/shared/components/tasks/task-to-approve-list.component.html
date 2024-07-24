@@ -1,0 +1,50 @@
+@if(tasks$ |async; as tasks){
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar class="bg-transparent ">
+      <span>Tareas asignadas para aprobacion</span>
+      <span class="separate"></span>
+      @if(tasks.length && tasks.length > 1){
+      <sort class="me-3" (orderEmit)="sortChange($event)"></sort>
+      }
+      <single-filter [initialValue]="searchValue" (filterChange)="filterChange($event)"></single-filter>
+    </mat-toolbar>
+    @if(tasks$ | async;as tasks){
+    @if(tasks.length){
+    <section [colCount]="2" class="mt-3 gap-4" cdkDropListGroup>
+      <!-- En revicion -->
+      <div>
+        <div class="mb-2 px-2 border-bottom fw-semibold d-flex justify-content-between">
+          <span [matBadge]="completedTasks.length" matBadgeOverlap="false">En Revisión</span>
+        </div>
+        <div cdkDropList id="completed" [cdkDropListData]="completedTasks" (cdkDropListDropped)="drop($event)"
+          style="max-height: calc(100vh - 380px); overflow: auto; min-height: 20rem;" class="px-2">
+          @for (task of completedTasks; track task.id) {
+          <app-task-card (onDeleteEmit)="onDeleteTask($event)" (onEditEmit)="onEdit($event)" [adminUsers]="adminUsers"
+            [userSelf]="user" [task]="task"></app-task-card>
+          }
+        </div>
+      </div>
+      <!-- approved -->
+      <div>
+        <div class="mb-2 px-2 border-bottom fw-semibold">
+          <span [matBadge]="approvedTasks.length" matBadgeOverlap="false">Aprobadas</span>
+        </div>
+        <div cdkDropList id="approved" [cdkDropListData]="approvedTasks" (cdkDropListDropped)="drop($event)"
+          style="max-height: calc(100vh - 380px); overflow: auto; min-height:20rem;" class="px-2">
+          @for (task of approvedTasks; track task.id) {
+          <app-task-card (onDeleteEmit)="onDeleteTask($event)" (onEditEmit)="onEdit($event)" [adminUsers]="adminUsers"
+            [userSelf]="user" [task]="task"></app-task-card>
+          }
+        </div>
+      </div>
+    </section>
+    }@else{
+    <section>
+      <div class="alert alert-warning">No se encontraron tareas</div>
+    </section>
+    }
+    }
+  </mat-card-content>
+</mat-card>
+}

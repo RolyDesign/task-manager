@@ -1,0 +1,167 @@
+<div class="container">
+  <mat-card class="p-4">
+    <mat-card-content>
+      <h6 class="p-0 m-0">Crear Usuario</h6>
+      <form class="mt-4" [formGroup]="userCreateForm" (submit)="onCreate()">
+        <div [colCount]="3">
+          <!-- name field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre(s)</mat-label>
+            <input matInput [formControlName]="'name'" type="text">
+            @if(name?.hasError('required')){
+            <mat-error>
+              Nombre es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- lastName field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Apellidos(s)</mat-label>
+            <input matInput [formControlName]="'lastName'" type="text">
+            @if(lastName?.hasError('required')){
+            <mat-error>
+              Apellido(s) es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- userName field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre Usuario</mat-label>
+            <input matInput [formControlName]="'userName'" type="text">
+            @if(userName?.hasError('required')){
+            <mat-error>
+              Nombre de usuario es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- age field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Edad</mat-label>
+            <input matInput [formControlName]="'age'" type="number">
+            @if(age?.hasError('required')){
+            <mat-error>
+              Edad es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- Email field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Correo</mat-label>
+            <input matInput [formControlName]="'email'">
+            @if(email?.hasError('required')){
+            <mat-error>
+              Email es requerido
+            </mat-error>
+            }
+            @if(email?.hasError('email')){
+            <mat-error>
+              Correo es invalido
+            </mat-error>
+            }
+            @if(email?.hasError('emailExists')){
+            <mat-error>
+              Este usuario ya esta registrado
+            </mat-error>
+            }
+            @if(email?.pending){
+            <mat-progress-spinner class="me-3" matSuffix [mode]="'indeterminate'"
+              [diameter]="20"></mat-progress-spinner>
+            }
+
+          </mat-form-field>
+          <!-- PhoneNumber field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Numero de Telefono</mat-label>
+            <input matInput [formControlName]="'phoneNumber'" type="text">
+            @if(phoneNumber?.hasError('required')){
+            <mat-error>
+              Number de telefono es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- password field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" matInput
+              [formControlName]="'password'">
+            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility' : ' visibility_off'}}</mat-icon>
+            </button>
+            @if(password?.hasError('required')){
+            <mat-error>
+              Contraseña es requerida
+            </mat-error>
+            }
+            @if(password?.hasError('pattern')){
+            <mat-error>
+              La contraseña deve incluir al menos un numero,un caracter especial, y estar entre los 5 y 15
+              caracteres.
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- confirmPassword field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input autocomplete="new-password" [type]="hideConfirmPassword ? 'password' : 'text'" matInput
+              [formControlName]="'confirmPassword'">
+            <button type="button" mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+              <mat-icon>{{hideConfirmPassword ? 'visibility' : ' visibility_off'}}</mat-icon>
+            </button>
+            @if(confirmPassword?.hasError('required')){
+            <mat-error>
+              Contraseña es requerida
+            </mat-error>
+            }
+            @if(confirmPassword?.hasError('confirmedValidator')){
+            <mat-error>
+              Debe coincidir con la contraseña
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- Approver field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Role </mat-label>
+            <mat-select formControlName="role">
+              @for (role of roleOptions; track $index) {
+              <mat-option [value]="role">{{role}}</mat-option>
+              }
+
+            </mat-select>
+            @if(role?.hasError('required')){
+            <mat-error>
+              Role es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- address field -->
+          <mat-form-field [colSpan]="3" appearance="outline">
+            <mat-label>Direccion</mat-label>
+            <textarea style="resize: none;" rows="3" matInput [formControlName]="'address'"></textarea>
+            @if(address?.hasError('required')){
+            <mat-error>
+              Direccion es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <!-- actions  button -->
+        <div class="d-flex justify-content-end gap-4 mt-3">
+          <button routerLink="/users" [disabled]="submitting" style="width: 15rem;" mat-raised-button
+            [color]="'primary'" type="button">
+            <span>Cerrar</span>
+          </button>
+          <button style="width: 15rem;" mat-flat-button [color]="'primary'"
+            [disabled]="!userCreateForm.valid || submitting" type="submit">
+            <span>Salvar</span>
+            @if(submitting){
+            <mat-spinner diameter="20"></mat-spinner>
+            }
+
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

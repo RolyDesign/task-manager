@@ -1,0 +1,32 @@
+<mat-dialog-content style="max-height:35rem;" class="p-5">
+  <div>
+    <div class=" mb-4 d-flex align-items-center">
+      <h6 class="fw-semibold d-inline p-0 m-0">Detalle de tarea</h6>
+      @if(identityService.hasPermission$(permission.tasks_update) | async){
+      <button (click)="onEdit()" role="button" class="ms-3" color="primary" mat-button>Editar</button>
+      }
+    </div>
+    <div [colCount]="9">
+      <div [colSpan]="9">
+        <span class="d-block text-label-sm">Nombre:</span>
+        <span class="d-block">{{Data.task.name | emptyData}}</span>
+      </div>
+      <div [colSpan]="3">
+        <span class="d-block text-label-sm">Estado:</span>
+        <span class="d-block">{{Data.task.status| emptyData}}</span>
+      </div>
+      <div [colSpan]="3">
+        <span class="d-block text-label-sm">Creador:</span>
+        <span class="d-block">{{Data.task.creatorName| emptyData}}</span>
+      </div>
+      <div [colSpan]="3">
+        <span class="d-block text-label-sm">Aprobador:</span>
+        <span class="d-block">{{Data.task.approvedUserName| emptyData}} <em>(Admin)</em></span>
+      </div>
+      <div [colSpan]="9">
+        <span class="d-block text-label-sm">Descripcion:</span>
+        <span class="d-block">{{Data.task.description | emptyData}}</span>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

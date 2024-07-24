@@ -1,0 +1,23 @@
+@import "../../../../styles/variables";
+.acction-task-card-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  &:hover {
+    background-color: rgb(214, 212, 212);
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.example-box:last-child {
+  border: none;
+}
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

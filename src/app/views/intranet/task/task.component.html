@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-content>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span>Mis Tareas</span>
+        </ng-template>
+        <app-task-list (onRefreshed)="taskListRefreshed()" [data]="myTasks"></app-task-list>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          @if(totalToApprove){
+          <span [matBadge]="totalToApprove" [matBadgeOverlap]="false">Tareas Asignadas</span>
+          }@else { <span>Tareas Asignadas</span>}
+
+        </ng-template>
+        <app-task-to-approve-list (onRefreshed)="taskToApproveListRefreshed()"
+          (totalToApprove)="totalToApprove = $event" [data]="myAssignedTask"></app-task-to-approve-list>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

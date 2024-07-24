@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center">
+  <span class="fs-6 me-2">Ordenar</span>
+  @if(currentStatus == ''){
+  <button (click)="changeOrder('asc')" mat-icon-button><mat-icon role="button"
+      style="transform: rotate(90deg);">swap_horiz</mat-icon></button>
+
+  }@else if(currentStatus == 'asc'){
+  <button (click)="changeOrder('desc')" mat-icon-button><mat-icon role="button"
+      style="transform: rotate(180deg);">straight</mat-icon></button>
+
+  }@else {
+  <button (click)="changeOrder('')" mat-icon-button><mat-icon role="button">straight</mat-icon></button>
+
+  }
+</div>

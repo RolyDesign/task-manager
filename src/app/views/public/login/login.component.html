@@ -1,0 +1,88 @@
+<div>
+  <mat-card style="max-width: 51rem;" class="p-3">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="text-center">
+            <h4 class="fw-semibold">
+              Inicio de sesion
+            </h4>
+            <p>¡Hola! Inicia secion con su correo.</p>
+          </div>
+          @if(errorMessage){
+          <span class="d-block text-danger mb-2">
+            {{errorMessage}}
+
+          </span>
+          }
+          <form [formGroup]="loginForm" (submit)="onLogin()">
+            <div class="row gap-3">
+              <!-- email field -->
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Direccion de correo</mat-label>
+                <input matInput [formControlName]="'email'" type="email">
+                @if(email?.hasError('required')){
+                <mat-error>
+                  Correo es requerido
+                </mat-error>
+                }
+                @if(email?.hasError('email')){
+                <mat-error>
+                  Correo es invalido
+                </mat-error>
+                }
+              </mat-form-field>
+              <!-- password field -->
+
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" matInput
+                  [formControlName]="'password'">
+                <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                  <mat-icon>{{hidePassword ? 'visibility' : ' visibility_off'}}</mat-icon>
+                </button>
+                @if(password?.hasError('required')){
+                <mat-error>
+                  Contraseña es requerida
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="row gap-2 ">
+              <!-- rememberme Field -->
+              <mat-checkbox class="p-0" [formControlName]="'rememberMe'">Remember me</mat-checkbox>
+              <!-- Create Account -->
+              <div class="col-12">
+                <div class="row">
+                  <span class="col-7"> O puede crear una cuenta.</span>
+                  <a routerLink="/register" class="col-5 text-end text-decoration-none"> Crear Cuenta</a>
+                </div>
+              </div>
+              <!-- submit button -->
+              <div class="col-12 mt-3">
+                <button style="width: 100%;" mat-flat-button [color]="'primary'"
+                  [disabled]="!loginForm.valid || submitting" type="submit">
+                  <span *ngIf="!submitting">Login</span>
+                  <mat-spinner *ngIf="submitting" diameter="20"></mat-spinner>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="d-none d-md-block col-md-6 ">
+          <div class="d-flex flex-column justify-content-center align-items-center h-100 gap-3">
+            <img src="logo.png" width="200" alt="Logo Guajiritos">
+            <span class="fs-3">Task Manager</span>
+            <span class="fs-6">Guajiritos <span class="text-info">SRL</span></span>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

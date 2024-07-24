@@ -1,0 +1,96 @@
+<mat-dialog-content style="max-height:35rem;" class="p-5">
+  <div>
+    <div class=" mb-4">
+      <h6 class="fw-semibold ">
+        Editar Tarea
+      </h6>
+    </div>
+
+    <form [formGroup]="taskEditForm" (submit)="onEditTask()">
+      <div [colCount]="2">
+        <!-- name field -->
+        <mat-form-field [colSpan]="2" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput [formControlName]="'name'" type="text">
+          @if(name?.hasError('required')){
+          <mat-error>
+            Nombre es requerido
+          </mat-error>
+          }
+        </mat-form-field>
+
+
+        <!-- Approver field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Aprobador </mat-label>
+          <mat-select formControlName="approvedUserId">
+            @for (admin of Data.adminUsers; track $index) {
+            <mat-option [value]="admin.id">{{admin.name + " " + admin.lastName}} <em>(Admin)</em></mat-option>
+            }
+
+          </mat-select>
+          @if(approvedUserId?.hasError('required')){
+          <mat-error>
+            Aprovador es requerido
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- status field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Estado </mat-label>
+          <mat-select formControlName="status">
+            @for (status of statusOptions; track $index) {
+            @if(status == 'Aprobada'){
+            @if(identityService.hasPermission$(permission.tasks_approve) | async){
+            @if(approvedUserId?.value == Data.task.userId || approvedUserId?.value == Data.user.id ){
+            <mat-option [value]="status">{{status}}</mat-option>
+            }
+            }
+            }@else {
+            <mat-option [value]="status">{{status}}</mat-option>
+            }
+            }
+          </mat-select>
+          @if(status?.hasError('required')){
+          <mat-error>
+            Estatus es requerido
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- description field -->
+        <mat-form-field [colSpan]="2" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea style="resize: none;" rows="4" matInput [formControlName]="'description'"></textarea>
+          @if(description?.hasError('required')){
+          <mat-error>
+            Nombre es requerido
+          </mat-error>
+          }
+        </mat-form-field>
+
+
+      </div>
+      <div class="row mt-3 ">
+        <!-- submit button -->
+        <div class="col-6 ">
+          <button (click)="dialogRef.close()" type="button" style="width: 98%;" mat-raised-button>
+            <span>Cerrar</span>
+          </button>
+        </div>
+        <div class="col-6  text-end">
+          <button [mat-dialog-close]="true" style="width: 98%;" mat-flat-button [color]="'primary'"
+            [disabled]="!taskEditForm.valid || submitting" type="submit">
+            <span *ngIf="!submitting">Salvar</span>
+            @if(submitting){
+            <mat-spinner diameter="20"></mat-spinner>
+            }
+
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>

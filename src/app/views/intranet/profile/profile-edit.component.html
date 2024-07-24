@@ -1,0 +1,110 @@
+<div class="container">
+  <mat-card class="p-4">
+    <mat-card-content>
+      <h6 class="p-0 m-0">Editar Perfil</h6>
+
+      <form class="mt-4" [formGroup]="profileEditForm" (submit)="onEdit()">
+        <div [colCount]="3">
+          <!-- name field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre(s)</mat-label>
+            <input matInput [formControlName]="'name'" type="text">
+            @if(name?.hasError('required')){
+            <mat-error>
+              Nombre es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- lastName field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Apellidos(s)</mat-label>
+            <input matInput [formControlName]="'lastName'" type="text">
+            @if(lastName?.hasError('required')){
+            <mat-error>
+              Apellido(s) es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- userName field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre Usuario</mat-label>
+            <input matInput [formControlName]="'userName'" type="text">
+            @if(userName?.hasError('required')){
+            <mat-error>
+              Nombre de usuario es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+
+          <!-- age field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Edad</mat-label>
+            <input matInput [formControlName]="'age'" type="number">
+            @if(age?.hasError('required')){
+            <mat-error>
+              Edad es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- Email field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Correo</mat-label>
+            <input matInput [formControlName]="'email'" type="email">
+            @if(email?.hasError('required')){
+            <mat-error>
+              Email es requerido
+            </mat-error>
+            }
+            @if(email?.hasError('email')){
+            <mat-error>
+              Email es invalido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- PhoneNumber field -->
+          <mat-form-field appearance="outline">
+            <mat-label>Numero de Telefono</mat-label>
+            <input matInput [formControlName]="'phoneNumber'" type="text">
+            @if(phoneNumber?.hasError('required')){
+            <mat-error>
+              Number de telefono es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- address field -->
+          <mat-form-field [colSpan]="3" appearance="outline">
+            <mat-label>Direccion</mat-label>
+            <textarea style="resize: none;" rows="3" matInput [formControlName]="'address'"></textarea>
+            @if(address?.hasError('required')){
+            <mat-error>
+              Direccion es requerido
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <!-- actions  button -->
+        <div class="d-flex justify-content-end gap-4 mt-3">
+          <button routerLink="/profile" [disabled]="submitting" style="width: 15rem;" mat-raised-button
+            [color]="'primary'" type="button">
+            <span>Cerrar</span>
+          </button>
+          <button style="width: 15rem;" mat-flat-button [color]="'primary'"
+            [disabled]="!profileEditForm.valid || submitting" type="submit">
+            <span>Salvar</span>
+            @if(submitting){
+            <mat-spinner diameter="20"></mat-spinner>
+            }
+
+          </button>
+        </div>
+
+      </form>
+
+
+
+
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

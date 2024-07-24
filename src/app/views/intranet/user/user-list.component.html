@@ -1,0 +1,122 @@
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar class="bg-transparent mb-4">
+      <span>Usuarios</span>
+      @if(identityService.hasPermission$(permission.users_create) | async){
+      <button routerLink="/users/add" class="ms-3" color="primary" mat-button>Crear</button>
+      }
+      <span class="separate"></span>
+      <single-filter [initialValue]="searchValue" (filterChange)="filterChange($event)"></single-filter>
+    </mat-toolbar>
+    <!-- CONTENT GOES HERE -->
+    <div class="table-scroll">
+      <table class="p-6" mat-table [dataSource]="dataSource" matSort>
+        <!-- name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Nombre(s) </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <!-- contactName Column -->
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Apellido(s) </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+        <!-- userName Column -->
+        <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Nombre de Usuario </th>
+          <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+        </ng-container>
+        <!-- age Column -->
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Edad </th>
+          <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+        </ng-container>
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Correo </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <!-- phoneNumber Column -->
+        <ng-container matColumnDef="phoneNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Numero de telefono </th>
+          <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+        </ng-container>
+        <!-- address Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Direccion </th>
+          <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+        </ng-container>
+        <!-- password Column -->
+        <ng-container matColumnDef="password">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Contraseña </th>
+          <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+        </ng-container>
+        <!-- role Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Role</th>
+          <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element, let i = index">
+            <div class="d-flex justify-content-end">
+              @if(identityService.hasPermission$(permission.users_read) | async){
+              <button title="Detalle" mat-icon-button color="primary" [routerLink]="['/users',element.id]">
+                <mat-icon>view_compact</mat-icon>
+              </button>
+              }
+              @if(identityService.hasPermission$(permission.users_update) |async){
+              <button title="editar" mat-icon-button color="primary" [routerLink]="['/users',element.id,'edit']">
+                <mat-icon>edit</mat-icon>
+              </button>
+              }
+              @if(identityService.hasPermission$(permission.users_delete)){
+              <button title="eliminar" (click)="onDelete(element)" mat-icon-button color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+              }
+
+            </div>
+          </td>
+        </ng-container>
+
+        <tr class="mat-row " *matNoDataRow>
+          <td class="mat-cell bg-red-200 text-center py-4 rounded-md " [attr.colspan]="displayedColumns.length">
+            No data.
+          </td>
+        </tr>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr [ngClass]="{'highlight': selectedRowIndex == i}" (click)="highlight(i)" (dblclick)="onDetail(row.id)"
+          mat-row *matRowDef="let row ; let i = index; columns: displayedColumns;">
+        </tr>
+
+      </table>
+    </div>
+
+    <mat-paginator class="mt-3" pageSize="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+
+
+
+
+
+
+
+
+
+
+  </mat-card-content>
+</mat-card>

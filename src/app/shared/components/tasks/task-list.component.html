@@ -1,0 +1,72 @@
+@if(tasks$ | async;as tasks){
+@if(identityService.hasPermission$(permission.tasks_approve)){
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar class="bg-transparent">
+      <span>Tareas</span>
+      @if(identityService.hasPermission$(permission.tasks_create) | async){
+      <button (click)="onCreateTask()" class="ms-3" color="primary" mat-button>Crear</button>
+      }
+      <span class="separate"></span>
+      @if(tasks.length && tasks.length > 1){
+      <sort class="me-3" (orderEmit)="sortChange($event)"></sort>
+      }
+      <single-filter [initialValue]="searchValue" (filterChange)="filterChange($event)"></single-filter>
+    </mat-toolbar>
+    @if(tasks.length){
+    <section [colCount]="3" class="mt-3 gap-4" cdkDropListGroup>
+      <!-- pending -->
+      <div>
+        <div class="mb-2 px-2 border-bottom fw-semibold d-flex justify-content-between">
+          <span [matBadge]="pendingTasks.length" matBadgeOverlap="false">Pendientes</span>
+
+        </div>
+        <div cdkDropList id="pendding" [cdkDropListData]="pendingTasks" (cdkDropListDropped)="drop($event)"
+          style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);"
+          class="px-2 example-list">
+          @for (task of pendingTasks; track task.id) {
+          <app-task-card [adminUsers]="adminUsers" [userSelf]="user" (onDeleteEmit)="onDeleteTask($event)" [task]="task"
+            (onEditEmit)="onEdit($event)"></app-task-card>
+          }
+        </div>
+      </div>
+      <!-- InProgress -->
+      <div>
+        <div class="mb-2 px-2 border-bottom fw-semibold">
+          <span [matBadge]="inProgressTasks.length" matBadgeOverlap="false">En Progreso</span>
+        </div>
+        <div cdkDropList id="progress" [cdkDropListData]="inProgressTasks" (cdkDropListDropped)="drop($event)"
+          style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);"
+          class="px-2 example-list">
+          @for (task of inProgressTasks; track task.id) {
+          <app-task-card [adminUsers]="adminUsers" [userSelf]="user" [task]="task" (onDeleteEmit)="onDeleteTask($event)"
+            (onEditEmit)="onEdit($event)"></app-task-card>
+          }
+        </div>
+      </div>
+      <!-- Completed-->
+      <div>
+        <div class="mb-2 px-2 border-bottom fw-semibold">
+          <span [matBadge]="completedTasks.length" matBadgeOverlap="false">Completadas</span>
+        </div>
+        <div cdkDropList id="completed" [cdkDropListData]="completedTasks" (cdkDropListDropped)="drop($event)"
+          style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);"
+          class="px-2 example-list">
+          @for (task of completedTasks; track task.id) {
+          <app-task-card [adminUsers]="adminUsers" [userSelf]="user" [task]="task" (onDeleteEmit)="onDeleteTask($event)"
+            (onEditEmit)="onEdit($event)"></app-task-card>
+          }@defer {
+          <div style="height: 1px;"></div>
+          }
+        </div>
+      </div>
+    </section>
+    }@else{
+    <section>
+      <div class="alert alert-warning">No se encontraron tareas</div>
+    </section>
+    }
+  </mat-card-content>
+</mat-card>
+}
+}

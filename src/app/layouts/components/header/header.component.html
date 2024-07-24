@@ -1,0 +1,34 @@
+@if(userIdentity | async;as user ){
+<mat-toolbar style="background-color: #d7e3ff;" class=" shadow-sm mb-4">
+  <!-- logo -->
+  <section class="d-flex align-items-center me-5">
+    <img src="logo.png" class="me-2" width="30">
+    <span>Task Manager</span>
+  </section>
+  <!-- navs -->
+
+  <app-nav></app-nav>
+  <span class="separate"></span>
+  <!-- profile -->
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon [title]="user.name + ' ' + user.lastName ">account_circle</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button routerLink="/profile" mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>Perfil</span>
+    </button>
+
+    <button (click)="onLogout()" mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar Sesión</span>
+    </button>
+  </mat-menu>
+
+
+
+
+</mat-toolbar>
+}

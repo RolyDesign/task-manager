@@ -1,0 +1,28 @@
+body {
+  background-color: var(--cui-tertiary-bg);
+}
+
+.wrapper {
+  width: 100%;
+}
+.separate {
+  flex: 1 1 auto;
+}
+.text-label-sm {
+  font-size: 0.8rem;
+  color: rgb(156, 156, 156);
+  font-weight: 600;
+}
+
+.border-color-pending {
+  border-color: $color-pending !important;
+}
+.border-color-inProgress {
+  border-color: $color-inProgress !important;
+}
+.border-color-completed {
+  border-color: $color-completed !important;
+}
+.border-color-approved {
+  border-color: $color-approved !important;
+}

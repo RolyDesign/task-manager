@@ -1,0 +1,6 @@
+<section>
+  @for (item of navItems; track item.id) {
+  <button [routerLink]="[item.path]" mat-button>{{item.name}}</button>
+  }
+
+</section>

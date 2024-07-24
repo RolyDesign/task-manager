@@ -1,0 +1,131 @@
+<div>
+  <mat-card style="max-width: 60rem;" class="p-3">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="text-center">
+            <h4 class="fw-semibold">
+              Registro de Ususario
+            </h4>
+            <p>Comience introduciendo sus datos</p>
+          </div>
+          <form [formGroup]="registerForm" (submit)="onRegister()">
+            <div class="row gap-2">
+              <!-- name field -->
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Nombre(s)</mat-label>
+                <input matInput [formControlName]="'name'" type="text">
+                @if(name?.hasError('required')){
+                <mat-error>
+                  Nombre es requerido
+                </mat-error>
+                }
+              </mat-form-field>
+              <!-- lastName field -->
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Apellido(s)</mat-label>
+                <input matInput [formControlName]="'lastName'" type="text">
+                @if(lastName?.hasError('required')){
+                <mat-error>
+                  Apellido(s) es requerido
+                </mat-error>
+                }
+              </mat-form-field>
+              <!-- email field -->
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Direccion de correo</mat-label>
+                <input matInput [formControlName]="'email'" type="email">
+                @if(email?.hasError('required')){
+                <mat-error>
+                  Correo es requerido
+                </mat-error>
+                }
+                @if(email?.hasError('email')){
+                <mat-error>
+                  Correo es invalido
+                </mat-error>
+                }
+                @if(email?.hasError('emailExists')){
+                <mat-error>
+                  Este usuario ya esta registrado
+                </mat-error>
+                }
+                @if(email?.pending){
+                <mat-progress-spinner class="me-3" matSuffix [mode]="'indeterminate'"
+                  [diameter]="20"></mat-progress-spinner>
+                }
+              </mat-form-field>
+              <!-- password field -->
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" matInput
+                  [formControlName]="'password'">
+                <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                  <mat-icon>{{hidePassword ? 'visibility' : ' visibility_off'}}</mat-icon>
+                </button>
+                @if(password?.hasError('required')){
+                <mat-error>
+                  Contraseña es requerida
+                </mat-error>
+                }
+                @if(password?.hasError('pattern')){
+                <mat-error>
+                  La contraseña deve incluir al menos un numero,un caracter especial, y estar entre los 5 y 15
+                  caracteres.
+                </mat-error>
+                }
+              </mat-form-field>
+              <!-- confirmPassword field -->
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Confirmar Contraseña</mat-label>
+                <input autocomplete="new-password" [type]="hideConfirmPassword ? 'password' : 'text'" matInput
+                  [formControlName]="'confirmPassword'">
+                <button type="button" mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+                  <mat-icon>{{hideConfirmPassword ? 'visibility' : ' visibility_off'}}</mat-icon>
+                </button>
+                @if(confirmPassword?.hasError('required')){
+                <mat-error>
+                  Contraseña es requerida
+                </mat-error>
+                }
+                @if(confirmPassword?.hasError('confirmedValidator')){
+                <mat-error>
+                  Debe coincidir con la contraseña
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="row gap-2 ">
+              <!-- Create Account -->
+              <div class="col-12">
+                <a routerLink="/login" class="text-decoration-none"> Inicio de sesion</a>
+              </div>
+              <!-- submit button -->
+              <div class="col-12 mt-3">
+                <button style="width: 100%;" mat-flat-button [color]="'primary'"
+                  [disabled]="!registerForm.valid || submitting" type="submit">
+                  <span *ngIf="!submitting">Registrarce</span>
+                  <mat-spinner *ngIf="submitting" diameter="20"></mat-spinner>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="d-none d-md-block col-md-6 ">
+          <div class="d-flex flex-column justify-content-center align-items-center h-100 gap-3">
+            <img src="logo.png" width="200" alt="Logo Guajiritos">
+            <span class="fs-3">Task Manager</span>
+            <span class="fs-6">Guajiritos <span class="text-info">SRL</span></span>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

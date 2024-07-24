@@ -1,0 +1,23 @@
+@import "../../../../styles/variables";
+
+table .mat-mdc-row:nth-child(even):not(.highlight) {
+  background-color: $alternateRowColor !important;
+}
+
+.table-scroll {
+  overflow-y: auto;
+}
+.highlight {
+  background: $focusedRowColor !important;
+}
+
+.mat-mdc-table .mdc-data-table__row:not(.mdc-data-table__row--selected):hover {
+  background-color: $hoverRowColor !important;
+  cursor: pointer;
+  color: white;
+}
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}

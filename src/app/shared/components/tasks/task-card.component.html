@@ -1,0 +1,34 @@
+<mat-card cdkDrag role="button" (dblclick)="onDetail()" style="border-left-width: 3px !important; cursor: move; "
+  class="task-card bg-white border-start mt-3 mb-1 example-box" [ngClass]="{
+    'border-color-pending':task.status=='Pendiente',
+    'border-color-inProgress':task.status=='En progreso',
+    'border-color-completed':task.status=='Completada',
+    'border-color-approved':task.status=='Aprobada'}">
+  <mat-card-content>
+    <div [colCount]="5">
+      <div [colSpan]="4">
+        <span class="d-block">
+          <span class="me-2  fw-bold"></span>
+          {{task.name | truncate }}
+        </span>
+      </div>
+      <div class="d-flex flex-column justify-content-between align-items-end">
+        <div style="width: 2rem; height: 2rem;"
+          class="border rounded-circle p-2 mb-3 d-flex align-items-center justify-content-center">
+          <span [title]="task.creatorName"> {{task.initialsName | uppercase}} </span>
+        </div>
+        <div class="d-flex">
+          @if(identityService.hasPermission$(permission.tasks_update)| async){
+          <mat-icon (click)="onEdit()" role="button" color="primary" class="acction-task-card-btn"
+            style="font-size:1rem ;">edit</mat-icon>
+          }
+          @if(identityService.hasPermission$(permission.tasks_delete) | async){
+          <mat-icon (click)="onDelete()" role="button" color="warn" class="acction-task-card-btn"
+            style="font-size:1rem ;">delete</mat-icon>
+          }
+
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

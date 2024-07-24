@@ -1,0 +1,20 @@
+<div class="container">
+  <mat-card class="p-4">
+    <mat-card-header>
+      <mat-card-title>
+        <img src="logo.png" width="50" alt="">
+        Bienvenido(a) a {{appInfoService.title}}
+      </mat-card-title>
+      <mat-card-subtitle class=" my-3">{{appInfoService.version}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class=" my-3">
+      <p>
+        {{appInfoService.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button routerLink="/tasks" mat-button>Ir a Tareas</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

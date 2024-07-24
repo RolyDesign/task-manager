@@ -1,0 +1,12 @@
+<h1 class="text-2xl" mat-dialog-title>{{Data.title}}</h1>
+<mat-dialog-content>
+  <p>{{Data.message}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  @if(!Data.clearButtonClose){
+  <button mat-button mat-dialog-close>{{Data.closeButtonName}}</button>
+  }
+  <button [color]="Data.confirmButton.color" mat-button [mat-dialog-close]="true"
+    cdkFocusInitial>{{Data.confirmButton.confirmButtonName}}</button>
+</mat-dialog-actions>
