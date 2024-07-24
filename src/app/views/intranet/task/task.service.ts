@@ -123,6 +123,9 @@ export class TaskService {
   }
   updateTask$(id: number, task: ITaskUpdateDTO) {
     return this.http.put<never>(`${this.baseUrl}/tasks/${id}`, task).pipe(
+      tap(() => {
+        this.toastService.successNotify(`Tarea actualizada`);
+      }),
       catchError((e: HttpErrorResponse) => {
         this.toastService.errorNotify(`Error actualizando la tarea" ${id}`);
         return throwError(() => e);

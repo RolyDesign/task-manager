@@ -67,8 +67,6 @@ export class TaskToApproveListComponent implements OnChanges {
   permission = PERMISSION_ENUM;
   completedTasks: ITaskGetDTO[] = [];
   approvedTasks: ITaskGetDTO[] = [];
-  user!: { id: number; name: string; lastName: string };
-  adminUsers: Array<{ id: number; name: string; lastName: string }> = [];
   tasks$ = new BehaviorSubject<ITaskGetDTO[]>([]);
   searchValue = '';
   sortOrder: StatusSort = '';
@@ -76,11 +74,8 @@ export class TaskToApproveListComponent implements OnChanges {
   @Input({ required: true }) data!: Partial<TaskResolveData>;
   @Output() totalToApprove = new EventEmitter<number>();
   @Output() onRefreshed = new EventEmitter();
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      this.user = this.data.user!;
-      this.adminUsers = this.data.adminUsers!;
       this.tasks$.next(this.data.tasksSelfToApprove!);
       this.tasks$.subscribe((tasks) => {
         this.completedTasks = tasks.filter((t) => t.status == 'Completada');
@@ -89,7 +84,6 @@ export class TaskToApproveListComponent implements OnChanges {
       this.totalToApprove.emit(this.completedTasks.length);
     }
   }
-
   refreshData() {
     return this.taskService
       .getTaskSelfAssignedToApprove$(this.searchValue, this.sortOrder)

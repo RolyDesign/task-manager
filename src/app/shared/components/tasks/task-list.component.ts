@@ -11,6 +11,7 @@ import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   EventEmitter,
   inject,
   Input,
@@ -37,6 +38,7 @@ import { SortComponent, StatusSort } from '../sort/sort.component';
 import { TaskCardComponent } from './task-card.component';
 import { TaskToApproveListComponent } from './task-to-approve-list.component';
 import { TaskResolveData } from '../../../views/intranet/task/task.resolver';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-task-list',
@@ -70,22 +72,19 @@ export class TaskListComponent {
   inProgressTasks: ITaskGetDTO[] = [];
   completedTasks: ITaskGetDTO[] = [];
   approvedTasks: ITaskGetDTO[] = [];
-  user!: { id: number; name: string; lastName: string };
-  adminUsers: Array<{ id: number; name: string; lastName: string }> = [];
   tasks$ = new BehaviorSubject<ITaskGetDTO[]>([]);
   searchValue = '';
   sortOrder: StatusSort = '';
   dialog = inject(MatDialog);
+  dr = inject(DestroyRef);
   totalWithoutapprove = 0;
   @Input({ required: true }) data!: Partial<TaskResolveData>;
   @Output() onRefreshed = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      this.user = this.data.user!;
-      this.adminUsers = this.data.adminUsers!;
       this.tasks$.next(this.data.tasks!);
-      this.tasks$.subscribe((tasks) => {
+      this.tasks$.pipe(takeUntilDestroyed(this.dr)).subscribe((tasks) => {
         this.pendingTasks = tasks.filter((t) => t.status == 'Pendiente');
         this.inProgressTasks = tasks.filter((t) => t.status == 'En progreso');
         this.completedTasks = tasks.filter((t) => t.status == 'Completada');
@@ -114,7 +113,7 @@ export class TaskListComponent {
   }
   onCreateTask() {
     const dialog = this.dialog.open(TaskCreateComponent, {
-      data: { user: this.user, adminUsers: this.adminUsers },
+      data: { user: this.data.user, adminUsers: this.data.adminUsers },
       minWidth: '50rem',
     });
     dialog

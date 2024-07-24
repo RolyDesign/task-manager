@@ -20,8 +20,8 @@
         <div cdkDropList id="completed" [cdkDropListData]="completedTasks" (cdkDropListDropped)="drop($event)"
           style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);" class="px-2">
           @for (task of completedTasks; track task.id) {
-          <app-task-card (onDeleteEmit)="onDeleteTask($event)" (onEditEmit)="onEdit($event)" [adminUsers]="adminUsers"
-            [userSelf]="user" [task]="task"></app-task-card>
+          <app-task-card (onDeleteEmit)="onDeleteTask($event)" (onEditEmit)="onEdit($event)"
+            [adminUsers]="data.adminUsers!" [userSelf]="data.user!" [task]="task"></app-task-card>
           }
         </div>
       </div>
@@ -33,8 +33,8 @@
         <div cdkDropList id="approved" [cdkDropListData]="approvedTasks" (cdkDropListDropped)="drop($event)"
           style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);" class="px-2">
           @for (task of approvedTasks; track task.id) {
-          <app-task-card (onDeleteEmit)="onDeleteTask($event)" (onEditEmit)="onEdit($event)" [adminUsers]="adminUsers"
-            [userSelf]="user" [task]="task"></app-task-card>
+          <app-task-card (onDeleteEmit)="onDeleteTask($event)" (onEditEmit)="onEdit($event)"
+            [adminUsers]="data.adminUsers!" [userSelf]="data.user!" [task]="task"></app-task-card>
           }
         </div>
       </div>

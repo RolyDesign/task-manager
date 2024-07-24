@@ -56,7 +56,6 @@ export class TaskCardComponent {
   dialogRef = inject(MatDialog);
   identityService = inject(IdentityService);
   permission = PERMISSION_ENUM;
-
   onDelete() {
     const dialog = this.dialogRef.open(ConfirmComponent, {
       data: {
@@ -78,7 +77,6 @@ export class TaskCardComponent {
       }
     });
   }
-
   onDetail() {
     const dialog = this.dialogRef.open(TaskDetailModalComponent, {
       data: {
@@ -89,7 +87,6 @@ export class TaskCardComponent {
       minWidth: '50rem',
     });
   }
-
   onEdit() {
     const dialog = this.dialogRef.open(TaskEditModalComponent, {
       data: {
