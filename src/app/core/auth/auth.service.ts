@@ -41,7 +41,6 @@ export class AuthService {
   private appInfoService = inject(AppInfoService);
   private toastService = inject(ToastService);
   private baseUrl = environment.API_URL;
-
   private _isRefreshing = false;
   get isRefreshing() {
     return this._isRefreshing;
@@ -78,7 +77,12 @@ export class AuthService {
       headers: req.headers.set('Authorization', `Bearer ${token}`),
     });
   }
-
+  refreshToken() {
+    const session = this.getSession();
+    return this.http.post<any>(`${this.baseUrl}/auth/refresh-token`, {
+      accessToken: session?.accessToken,
+    });
+  }
   //Simulando login
   logIn(email: string, password: string) {
     return this.userService.getUserByEmail$(email).pipe(
@@ -108,19 +112,11 @@ export class AuthService {
       })
     );
   }
-
-  refreshToken() {
-    const session = this.getSession();
-    return this.http.post<any>(`${this.baseUrl}/auth/refresh-token`, {
-      accessToken: session?.accessToken,
-    });
-  }
   updateToken(newToken: string) {
     const session = this.getSession()!;
     session.accessToken = newToken;
     this.setSession(session);
   }
-
   registerUser(partialUser: {
     name: string;
     lastName: string;
@@ -152,7 +148,6 @@ export class AuthService {
       })
     );
   }
-
   exitApp() {
     this.clearStorageCache();
     this.router.navigate(['auth/login']);

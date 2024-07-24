@@ -19,8 +19,6 @@ import {
 import { AuthService } from './auth.service';
 import { environment } from '../../../environments/environment';
 
-//export const CONTENT_TYPE = new HttpContextToken(() => 'application/json');
-
 export function authInterceptor(
   req: HttpRequest<unknown>,
   next: HttpHandlerFn

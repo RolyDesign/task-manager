@@ -8,7 +8,6 @@ import { of, switchMap } from 'rxjs';
 })
 export class IdentityService {
   private userService = inject(UserService);
-
   hasPermission$(perrmission: PERMISSION_ENUM) {
     return this.userService.userIdentity$.pipe(
       switchMap((ui) => {
@@ -16,15 +15,6 @@ export class IdentityService {
       })
     );
   }
-
-  hasRole$(role: ROLE_ENUM) {
-    return this.userService.userIdentity$.pipe(
-      switchMap((ui) => {
-        return of(ui.role == role);
-      })
-    );
-  }
-
   hasPermissions$(permissions: PERMISSION_ENUM[]) {
     return this.userService.userIdentity$.pipe(
       switchMap((ui) => {

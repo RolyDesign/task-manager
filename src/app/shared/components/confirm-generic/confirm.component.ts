@@ -31,9 +31,6 @@ export class ConfirmComponent {
     @Inject(MAT_DIALOG_DATA)
     public Data: DialogData
   ) {}
-
-  ngOnInit() {}
-
   onNoClick(): void {
     this.dialogRef.close();
   }

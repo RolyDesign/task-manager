@@ -42,7 +42,6 @@ export class UserService {
   private appService = inject(AppInfoService);
   private platformId = inject(PLATFORM_ID);
   private userIdentitySubject!: BehaviorSubject<IUserIdentity>;
-
   router = inject(Router);
   constructor() {
     if (isPlatformBrowser(this.platformId)) {

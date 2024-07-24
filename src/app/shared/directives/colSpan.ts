@@ -29,7 +29,6 @@ export class ColSpanDirective implements OnInit {
       );
     }
   }
-
   resizeChange(mql: MediaQueryList, nativeElement: any) {
     if (mql.matches) {
       this.render2.setStyle(nativeElement, 'grid-column', `span 1`);

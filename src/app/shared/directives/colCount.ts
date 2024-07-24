@@ -21,11 +21,9 @@ export class ColCountDirective implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       const nativeElement = this.el.nativeElement;
       const mediaQL = matchMedia('(max-width: 767px)');
-
       this.render2.setStyle(nativeElement, 'display', 'grid');
       this.render2.setStyle(nativeElement, 'row-gap', '12px');
       this.render2.setStyle(nativeElement, 'column-gap', '12px');
-
       this.resizeChange(mediaQL, nativeElement);
       //listen resize
       this.render2.listen(window, 'resize', () =>
@@ -33,7 +31,6 @@ export class ColCountDirective implements OnInit {
       );
     }
   }
-
   resizeChange(mql: MediaQueryList, nativeElement: any) {
     if (mql.matches) {
       this.render2.setStyle(

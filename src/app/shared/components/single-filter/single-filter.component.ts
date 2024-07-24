@@ -22,17 +22,14 @@ import { MatIconModule } from '@angular/material/icon';
 export class SingleFilterComponent {
   searchForm!: FormGroup;
   fb = inject(FormBuilder);
-
   @Input() visible: boolean = true;
   @Input() debounceTime: number = 500;
   @Input() initialValue: string = '';
   @Output() filterChange = new EventEmitter<string>();
-
   ngOnInit() {
     this.searchForm = this.fb.group({
       searchControl: [this.initialValue],
     });
-
     this.searchForm
       .get('searchControl')
       ?.valueChanges.pipe(debounceTime(this.debounceTime))
@@ -40,7 +37,6 @@ export class SingleFilterComponent {
         this.filterChange.emit(res);
       });
   }
-
   clearFilter() {
     this.searchForm.get('searchControl')?.patchValue('');
   }
