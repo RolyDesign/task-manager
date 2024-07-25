@@ -118,7 +118,7 @@
     {
       "name": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical.",
       "description": "Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in",
-      "status": "En progreso",
+      "status": "Completada",
       "userId": 2,
       "approvedUserId": 1,
       "initialsName": "MP",
@@ -151,7 +151,7 @@
     {
       "name": "It was popularised in the 1960s with the release of Letraset sheets containing",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
-      "status": "Aprobada",
+      "status": "Completada",
       "userId": 2,
       "approvedUserId": 2,
       "initialsName": "MP",
@@ -162,7 +162,7 @@
     {
       "name": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical",
       "description": "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. ",
-      "status": "Aprobada",
+      "status": "En progreso",
       "userId": 2,
       "approvedUserId": 2,
       "initialsName": "MP",
@@ -195,7 +195,7 @@
     {
       "name": "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from ",
       "description": "passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of ",
-      "status": "En progreso",
+      "status": "Completada",
       "userId": 2,
       "approvedUserId": 3,
       "initialsName": "MP",
@@ -206,7 +206,7 @@
     {
       "name": "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. ",
       "description": "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate ",
-      "status": "Aprobada",
+      "status": "Completada",
       "userId": 2,
       "approvedUserId": 2,
       "initialsName": "MP",
@@ -239,7 +239,7 @@
     {
       "name": "If you are going to use a passage of Lorem Ipsum, you need to be sure",
       "description": "there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the I",
-      "status": "En progreso",
+      "status": "Completada",
       "userId": 2,
       "approvedUserId": 3,
       "initialsName": "MP",
