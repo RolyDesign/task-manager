@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -43,7 +47,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([
         loaderInterceptor,
-        authInterceptor,
+        //authInterceptor,
         // errorApiInterceptor,
       ])
     ),
@@ -51,9 +55,10 @@ export const appConfig: ApplicationConfig = {
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    }), provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          }),
+    }),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };
