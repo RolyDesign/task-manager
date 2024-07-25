@@ -11,6 +11,7 @@ import { TaskToApproveListComponent } from '../../../shared/components/tasks/tas
 import { PERMISSION_ENUM } from '../../../shared/metadata';
 import { TaskResolveData } from './task.resolver';
 import { TaskService } from './task.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-task',
@@ -21,6 +22,7 @@ import { TaskService } from './task.service';
     TaskToApproveListComponent,
     MatCardModule,
     MatBadgeModule,
+    AsyncPipe,
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',

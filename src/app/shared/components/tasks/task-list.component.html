@@ -22,7 +22,7 @@
 
         </div>
         <div cdkDropList id="pendding" [cdkDropListData]="pendingTasks" (cdkDropListDropped)="drop($event)"
-          style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);"
+          style="max-height: calc(100vh - 370px); overflow: auto; min-height: calc(100vh - 370px);"
           class="px-2 example-list">
           @for (task of pendingTasks; track task.id) {
           <app-task-card [adminUsers]="data.adminUsers!" [userSelf]="data.user!" (onDeleteEmit)="onDeleteTask($event)"
@@ -36,7 +36,7 @@
           <span [matBadge]="inProgressTasks.length" matBadgeOverlap="false">En Progreso</span>
         </div>
         <div cdkDropList id="progress" [cdkDropListData]="inProgressTasks" (cdkDropListDropped)="drop($event)"
-          style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);"
+          style="max-height: calc(100vh - 370px); overflow: auto; min-height: calc(100vh - 370px);"
           class="px-2 example-list">
           @for (task of inProgressTasks; track task.id) {
           <app-task-card [adminUsers]="data.adminUsers!" [userSelf]="data.user!" [task]="task"
@@ -50,7 +50,7 @@
           <span [matBadge]="completedTasks.length" matBadgeOverlap="false">Completadas</span>
         </div>
         <div cdkDropList id="completed" [cdkDropListData]="completedTasks" (cdkDropListDropped)="drop($event)"
-          style="max-height: calc(100vh - 420px); overflow: auto; min-height: calc(100vh - 420px);"
+          style="max-height: calc(100vh - 370px); overflow: auto; min-height: calc(100vh - 370px);"
           class="px-2 example-list">
           @for (task of completedTasks; track task.id) {
           <app-task-card [adminUsers]="data.adminUsers!" [userSelf]="data.user!" [task]="task"
