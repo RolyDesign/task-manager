@@ -59,7 +59,6 @@ export class UserListComponent {
     'email',
     'phoneNumber',
     'address',
-    'password',
     'role',
     'actions',
   ];

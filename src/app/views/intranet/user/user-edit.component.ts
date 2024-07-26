@@ -78,10 +78,11 @@ export class UserEditComponent {
         phoneNumber: [this.user.phoneNumber, Validators.required],
         address: [this.user.address, Validators.required],
         password: [
-          this.user.password,
+          this.user.encPassword,
           [Validators.required, Validators.pattern(this.patterPassword)],
         ],
-        confirmPassword: [this.user.password, Validators.required],
+
+        confirmPassword: [this.user.encPassword, Validators.required],
         role: [this.user.role, Validators.required],
         permissions: [this.userService.setPermissionsByRole(this.user.role)],
       },
@@ -103,13 +104,15 @@ export class UserEditComponent {
     });
 
     this.password?.valueChanges.subscribe((res) => {
-      this.confirmPassword?.setValue('');
-      this.showConffirmPass = this.user.password !== res;
+      if (res !== this.user.encPassword) {
+        this.confirmPassword?.setValue('');
+        this.showConffirmPass = this.user.encPassword !== res;
+      }
     });
   }
   onEdit() {
     const formValue = { ...this.userEditForm.value };
-    delete formValue.confirmPassword;
+    formValue.initailsName = delete formValue.confirmPassword;
     this.userEditForm.disable();
     this.userService
       .updateUser$(this.user.id, formValue)

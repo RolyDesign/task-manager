@@ -72,8 +72,6 @@ export class RegisterComponent {
         lastName: ['', [Validators.required]],
         email: new FormControl('', {
           validators: [Validators.required, Validators.email],
-          asyncValidators: [this.userService.uniqueEmailValidatorAsync()],
-          updateOn: 'blur',
         }),
         password: [
           '',
@@ -105,7 +103,7 @@ export class RegisterComponent {
           return EMPTY;
         })
       )
-      .subscribe(() => {
+      .subscribe((res) => {
         this.registerForm.enable();
         this.submitting = false;
         this.router.navigate(['login']);

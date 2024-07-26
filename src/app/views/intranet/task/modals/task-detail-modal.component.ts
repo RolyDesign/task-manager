@@ -43,7 +43,7 @@ import { TaskEditModalComponent } from './task-edit-modal.component';
 export class TaskDetailModalComponent {
   identityService = inject(IdentityService);
   permission = PERMISSION_ENUM;
-  dialog = inject(MatDialog);
+
   constructor(
     public dialogRef: MatDialogRef<TaskDetailModalComponent>,
     @Inject(MAT_DIALOG_DATA)
@@ -53,15 +53,4 @@ export class TaskDetailModalComponent {
       adminUsers: Array<{ id: number; name: string; lastName: string }>;
     }
   ) {}
-
-  onEdit() {
-    this.dialogRef.close();
-    this.dialog.open(TaskEditModalComponent, {
-      data: {
-        user: this.Data.user,
-        task: this.Data.task,
-        adminUsers: this.Data.adminUsers,
-      },
-    });
-  }
 }

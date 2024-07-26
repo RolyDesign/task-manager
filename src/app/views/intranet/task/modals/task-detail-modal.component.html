@@ -2,9 +2,7 @@
   <div>
     <div class=" mb-4 d-flex align-items-center">
       <h6 class="fw-semibold d-inline p-0 m-0">Detalle de tarea</h6>
-      @if(identityService.hasPermission$(permission.tasks_update) | async){
-      <button (click)="onEdit()" role="button" class="ms-3" color="primary" mat-button>Editar</button>
-      }
+
     </div>
     <div [colCount]="9">
       <div [colSpan]="9">

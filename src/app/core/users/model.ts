@@ -41,6 +41,7 @@ export interface IUserGetDTO {
   phoneNumber: string;
   address: string;
   password: string;
+  encPassword: string;
   role: ROLE_ENUM;
   permissions: PERMISSION_ENUM[];
 }
@@ -55,6 +56,7 @@ export interface IUserUpdateDTO {
   password: string;
   role: ROLE_ENUM;
   permissions: PERMISSION_ENUM[];
+  encPassword: string;
 }
 export interface IUserCreateDTO {
   name: string;
@@ -67,4 +69,5 @@ export interface IUserCreateDTO {
   password: string;
   role: ROLE_ENUM;
   permissions: PERMISSION_ENUM[];
+  encPassword: string;
 }

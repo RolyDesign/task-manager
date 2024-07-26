@@ -28,9 +28,9 @@ export const taskResolver: ResolveFn<
           tasksSelfToApprove: taskService.getTaskSelfAssignedToApprove$(),
           user: userService.userIdentity$.pipe(
             map((ui) => ({
-              id: ui.userId,
-              name: ui.name,
-              lastName: ui.lastName,
+              id: ui!.userId,
+              name: ui!.name,
+              lastName: ui!.lastName,
             }))
           ),
           adminUsers: userService.getAdminUsers$().pipe(
@@ -47,7 +47,11 @@ export const taskResolver: ResolveFn<
       return combineLatest({
         tasks: taskService.getTasksSelf$(),
         user: userService.userIdentity$.pipe(
-          map((ui) => ({ id: ui.userId, name: ui.name, lastName: ui.lastName }))
+          map((ui) => ({
+            id: ui!.userId,
+            name: ui!.name,
+            lastName: ui!.lastName,
+          }))
         ),
         adminUsers: userService.getAdminUsers$().pipe(
           map((us) =>

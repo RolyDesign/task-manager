@@ -27,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute } from '@angular/router';
 
-import { BehaviorSubject, tap, switchMap } from 'rxjs';
+import { BehaviorSubject, tap, switchMap, of } from 'rxjs';
 import { IdentityService } from '../../../core/users/identity.service';
 import { ITaskGetDTO, TaskStatus } from '../../../views/intranet/task/models';
 import { TaskService } from '../../../views/intranet/task/task.service';
@@ -76,29 +76,32 @@ export class TaskToApproveListComponent implements OnChanges {
   dr = inject(DestroyRef);
   @Input({ required: true }) data!: Partial<TaskResolveData>;
   @Output() totalToApprove = new EventEmitter<number>();
-  @Output() onRefreshed = new EventEmitter();
+  @Output() onRefreshed = new EventEmitter<{
+    filter: string;
+    sort: StatusSort;
+  }>();
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.tasks$.next(this.data.tasksSelfToApprove!);
-      this.totalToApprove.emit(this.completedTasks.length);
     }
   }
   ngOnInit() {
     this.tasks$.pipe(takeUntilDestroyed(this.dr)).subscribe((tasks) => {
       this.completedTasks = tasks.filter((t) => t.status == 'Completada');
       this.approvedTasks = tasks.filter((t) => t.status == 'Aprobada');
+      this.totalToApprove.emit(this.completedTasks.length);
     });
   }
   refreshData() {
-    return this.taskService
-      .getTaskSelfAssignedToApprove$(this.searchValue, this.sortOrder)
-      .pipe(
-        tap((res) => {
-          this.tasks$.next(res);
-          this.onRefreshed.emit();
-          this.totalToApprove.emit(this.completedTasks.length);
-        })
-      );
+    return of(true).pipe(
+      tap(() => {
+        this.onRefreshed.emit({
+          sort: this.sortOrder,
+          filter: this.searchValue,
+        });
+        this.totalToApprove.emit(this.completedTasks.length);
+      })
+    );
   }
   filterChange(e: string) {
     this.searchValue = e;

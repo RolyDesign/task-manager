@@ -26,7 +26,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, combineLatest, tap, switchMap, EMPTY } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  tap,
+  switchMap,
+  EMPTY,
+  of,
+} from 'rxjs';
 import { IdentityService } from '../../../core/users/identity.service';
 import { TaskCreateComponent } from '../../../views/intranet/task/modals/task-create.component';
 import { ITaskGetDTO, TaskStatus } from '../../../views/intranet/task/models';
@@ -79,7 +86,10 @@ export class TaskListComponent {
   dr = inject(DestroyRef);
   totalWithoutapprove = 0;
   @Input({ required: true }) data!: Partial<TaskResolveData>;
-  @Output() onRefreshed = new EventEmitter();
+  @Output() onRefreshed = new EventEmitter<{
+    filter: string;
+    sort: StatusSort;
+  }>();
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
@@ -96,14 +106,14 @@ export class TaskListComponent {
   }
 
   refreshData() {
-    return this.taskService
-      .getTasksSelf$(this.searchValue, this.sortOrder)
-      .pipe(
-        tap((res) => {
-          this.tasks$.next(res);
-          this.onRefreshed.emit();
-        })
-      );
+    return of(true).pipe(
+      tap(() => {
+        this.onRefreshed.emit({
+          filter: this.searchValue,
+          sort: this.sortOrder,
+        });
+      })
+    );
   }
   filterChange(e: string) {
     this.searchValue = e;
@@ -123,13 +133,7 @@ export class TaskListComponent {
       .pipe(
         switchMap((res) => {
           if (res) {
-            return this.taskService
-              .getTasksSelf$(this.searchValue, this.sortOrder)
-              .pipe(
-                tap((res) => {
-                  this.tasks$.next(res);
-                })
-              );
+            return this.refreshData();
           }
           return EMPTY;
         })

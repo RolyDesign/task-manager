@@ -45,11 +45,7 @@
                   Correo es invalido
                 </mat-error>
                 }
-                @if(email?.hasError('emailExists')){
-                <mat-error>
-                  Este usuario ya esta registrado
-                </mat-error>
-                }
+
                 @if(email?.pending){
                 <mat-progress-spinner class="me-3" matSuffix [mode]="'indeterminate'"
                   [diameter]="20"></mat-progress-spinner>

@@ -20,7 +20,7 @@ export class NavService {
         this.navItems.forEach((e) => {
           if (
             !e.permission ||
-            (e.permission && i.permissions.includes(e.permission))
+            (e.permission && i!.permissions.includes(e.permission))
           ) {
             navItems.push(e);
           }

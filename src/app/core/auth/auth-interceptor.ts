@@ -26,7 +26,10 @@ export function authInterceptor(
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (req.url == `${environment.API_URL}/users`) {
+  if (req.url == `${environment.API_URL}/signin`) {
+    return next(req);
+  }
+  if (req.url == `${environment.API_URL}/register`) {
     return next(req);
   }
 

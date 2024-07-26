@@ -25,7 +25,7 @@ export const USERS_ROUTES: Routes = [
   },
   {
     path: 'users/:id',
-    resolve: { user: userResolver },
+    resolve: { userData: userResolver },
     canActivate: [permissionGuard],
     loadComponent: () =>
       import('./user-detail.component').then((m) => m.UserDetailComponent),

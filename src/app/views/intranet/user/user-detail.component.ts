@@ -9,6 +9,9 @@ import { ColSpanDirective } from '../../../shared/directives/colSpan';
 import { EmptyDataPipe } from '../../../shared/pipes/empty-data.pipe';
 import { SeparatorCharPipe } from '../../../shared/pipes/separator-character.pipe copy';
 import { MatIconModule } from '@angular/material/icon';
+import { TaskComponent } from '../task/task.component';
+import { TaskResolveData } from '../task/task.resolver';
+import { UserDetailResolve } from './user.resolver';
 
 @Component({
   selector: 'app-user-detail',
@@ -22,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     RouterLink,
     SeparatorCharPipe,
     MatIconModule,
+    TaskComponent,
   ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
@@ -56,12 +60,12 @@ export class UserDetailComponent {
         fieldDisplayName: 'Numero de telefono',
       },
       {
-        fieldName: 'password',
-        fieldDisplayName: 'Contraseña',
-      },
-      {
         fieldName: 'role',
         fieldDisplayName: 'Role',
+      },
+      {
+        fieldName: 'encPassword',
+        fieldDisplayName: 'Password',
       },
       {
         fieldName: 'permissions',
@@ -77,9 +81,21 @@ export class UserDetailComponent {
   };
   route = inject(ActivatedRoute);
   user!: IUserGetDTO;
+  taskData!: TaskResolveData;
   ngOnInit() {
-    this.route.data.subscribe(({ user }) => {
-      this.user = user;
+    this.route.data.subscribe(({ userData }) => {
+      const data: UserDetailResolve = userData;
+      this.user = data.userDetail;
+      this.taskData = {
+        adminUsers: data.adminUsers,
+        tasks: data.taskByUser,
+        tasksSelfToApprove: data.tasksToApproveByUser,
+        user: {
+          id: data.userDetail.id,
+          name: data.userDetail.name,
+          lastName: data.userDetail.lastName,
+        },
+      };
     });
   }
 }

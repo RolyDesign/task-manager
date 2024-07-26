@@ -85,32 +85,21 @@ export class AuthService {
   }
   //Simulando login
   logIn(email: string, password: string) {
-    return this.userService.getUserByEmail$(email).pipe(
-      switchMap((users) => {
-        if (
-          users.length &&
-          users[0].email == email &&
-          users[0].password == password
-        ) {
-          const accessToken = `token_de_ejemplo ${users[0].email}`;
+    return this.http
+      .post<any>(`${this.baseUrl}/signin`, { email, password })
+      .pipe(
+        switchMap((res) => {
+          const accessToken = res.accessToken;
           this.setSession({
             accessToken: accessToken,
           });
-          return of(this.userService.setUserSelfIdentity$(users[0]));
-        }
-        return throwError(
-          () =>
-            new HttpErrorResponse({
-              status: 400,
-              error: 'Credenciales Invalidas',
-            })
-        );
-      }),
-      catchError((e: HttpErrorResponse) => {
-        this.toastService.errorNotify(e.error);
-        return throwError(() => e);
-      })
-    );
+          return of(this.userService.setUserSelfIdentity$(res.user));
+        }),
+        catchError((e: HttpErrorResponse) => {
+          this.toastService.errorNotify('Chequea sus creadenciales');
+          return throwError(() => e);
+        })
+      );
   }
   updateToken(newToken: string) {
     const session = this.getSession()!;
@@ -140,8 +129,9 @@ export class AuthService {
         PERMISSION_ENUM.tasks_delete,
         PERMISSION_ENUM.tasks_create,
       ],
+      encPassword: partialUser.password,
     };
-    return this.http.post<any>(`${environment.API_URL}/users`, user).pipe(
+    return this.http.post(`${environment.API_URL}/register`, user).pipe(
       catchError((e: HttpErrorResponse) => {
         this.toastService.errorNotify(e.error);
         return throwError(() => e);

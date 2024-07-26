@@ -1,21 +1,46 @@
+@if(dataTask){
+@if(dataTask.tasksSelfToApprove){
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span>Mis Tareas</span>
+    </ng-template>
+    <app-task-list (onRefreshed)="refreshTaskList($event)" [data]="myTasks"></app-task-list>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      @if(totalToApprove()){
+      <span [matBadge]="totalToApprove()" [matBadgeOverlap]="false">Tareas Asignadas</span>
+      }@else { <span>Tareas Asignadas</span>}
+    </ng-template>
+    <app-task-to-approve-list (onRefreshed)="refreshListToApprove($event)" (totalToApprove)="onTotalToApprove($event)"
+      [data]="myAssignedTask"></app-task-to-approve-list>
+  </mat-tab>
+</mat-tab-group>
+}@else {
+<app-task-list (onRefreshed)="refreshTaskList($event)" [data]="myTasks"></app-task-list>
+}
+
+}@else {
 @if(identityService.hasPermission$(permission.tasks_approve) | async){
 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
   <mat-tab>
     <ng-template mat-tab-label>
       <span>Mis Tareas</span>
     </ng-template>
-    <app-task-list (onRefreshed)="taskListRefreshed()" [data]="myTasks"></app-task-list>
+    <app-task-list (onRefreshed)="refreshTaskList($event)" [data]="myTasks"></app-task-list>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      @if(totalToApprove){
-      <span [matBadge]="totalToApprove" [matBadgeOverlap]="false">Tareas Asignadas</span>
+      @if(totalToApprove()){
+      <span [matBadge]="totalToApprove()" [matBadgeOverlap]="false">Tareas Asignadas</span>
       }@else { <span>Tareas Asignadas</span>}
     </ng-template>
-    <app-task-to-approve-list (onRefreshed)="taskToApproveListRefreshed()" (totalToApprove)="totalToApprove = $event"
+    <app-task-to-approve-list (onRefreshed)="refreshListToApprove($event)" (totalToApprove)="onTotalToApprove($event)"
       [data]="myAssignedTask"></app-task-to-approve-list>
   </mat-tab>
 </mat-tab-group>
 }@else {
-<app-task-list (onRefreshed)="taskListRefreshed()" [data]="myTasks"></app-task-list>
+<app-task-list (onRefreshed)="refreshTaskList($event)" [data]="myTasks"></app-task-list>
+}
 }

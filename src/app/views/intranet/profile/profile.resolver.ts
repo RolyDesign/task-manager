@@ -10,7 +10,7 @@ export const profileResolver: ResolveFn<
   const userService = inject(UserService);
   return userService.userIdentity$.pipe(
     switchMap((res) => {
-      return userService.getUserSelf$(res.userId);
+      return userService.getUserSelf$(res!.userId);
     })
   );
 };

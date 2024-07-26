@@ -80,7 +80,7 @@ export class TaskEditModalComponent {
       status: [task.status],
       userId: [task.userId, Validators.required],
       approvedUserId: [task.approvedUserId, Validators.required],
-      initialsName: [task.initialsName],
+      initialsName: [this.buildInitialsName(user.name, user.lastName)],
       approvedUserName: [task.approvedUserName],
       creatorName: [task.creatorName],
     });
@@ -117,6 +117,7 @@ export class TaskEditModalComponent {
         this.submitting = false;
       });
   }
+
   get name() {
     return this.taskEditForm.get('name');
   }

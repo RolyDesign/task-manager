@@ -9,6 +9,8 @@ import {
   map,
   Observable,
   of,
+  ReplaySubject,
+  Subject,
   switchMap,
   tap,
   throwError,
@@ -41,7 +43,7 @@ export class UserService {
   private toastService = inject(ToastService);
   private appService = inject(AppInfoService);
   private platformId = inject(PLATFORM_ID);
-  private userIdentitySubject!: BehaviorSubject<IUserIdentity>;
+  private userIdentitySubject = new ReplaySubject<IUserIdentity>();
   router = inject(Router);
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
@@ -51,7 +53,7 @@ export class UserService {
           ) as IUserIdentity)
         : null;
       if (identity) {
-        this.userIdentitySubject = new BehaviorSubject<IUserIdentity>(identity);
+        this.userIdentitySubject.next(identity);
       } else {
         this.router.navigate(['login']);
       }
@@ -160,7 +162,7 @@ export class UserService {
       switchMap((res) => {
         return this.getUsers$().pipe(
           switchMap((users) => {
-            const currentUser = users.find((u) => u.id == res.userId);
+            const currentUser = users.find((u) => u.id == res!.userId);
             if (currentUser?.password == data.currentPassword) {
               currentUser!.password = data.newPassword;
               return this.http.put<never>(
@@ -206,6 +208,7 @@ export class UserService {
     }
   }
   createUser$(user: IUserCreateDTO) {
+    user.encPassword = user.password;
     return this.http
       .post<IUserGetDTO>(`${environment.API_URL}/users`, user)
       .pipe(
@@ -234,6 +237,7 @@ export class UserService {
       );
   }
   updateUser$(userId: number, user: IUserUpdateDTO) {
+    user.encPassword = user.password;
     return this.http
       .put<never>(`${environment.API_URL}/users/${userId}`, user)
       .pipe(

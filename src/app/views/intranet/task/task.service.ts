@@ -22,7 +22,7 @@ export class TaskService {
         return this.http
           .get<ITaskGetDTO[]>(`${this.baseUrl}/tasks`, {
             params: {
-              userId: identity.userId,
+              userId: identity!.userId,
               _sort: 'name',
               _order: sortOrder,
               q: filter,
@@ -54,6 +54,7 @@ export class TaskService {
         return this.http
           .get<ITaskGetDTO[]>(`${this.baseUrl}/tasks`, {
             params: {
+              approvedUserId: identity!.userId,
               _sort: 'name',
               _order: sortOrder,
               q: filter,
@@ -63,9 +64,8 @@ export class TaskService {
             map((us) => {
               return us.filter(
                 (u) =>
-                  //u.userId == identity.userId ||
-                  u.approvedUserId == identity.userId &&
-                  (u.status == 'Completada' || u.status == 'Aprobada')
+                  //u.approvedUserId == identity!.userId &&
+                  u.status == 'Completada' || u.status == 'Aprobada'
               );
             })
           );
@@ -77,18 +77,63 @@ export class TaskService {
       })
     );
   }
-  getTasksByUserId$(userId: number) {
+  getTaskToApproveByUserId$(
+    id: number,
+    filter: string = '',
+    sortOrder: StatusSort = ''
+  ) {
     return this.http
       .get<ITaskGetDTO[]>(`${this.baseUrl}/tasks`, {
         params: {
-          userId,
+          approvedUserId: id,
+          _sort: 'name',
+          _order: sortOrder,
+          q: filter,
         },
       })
       .pipe(
+        map((us) => {
+          return us.filter(
+            (u) =>
+              //u.approvedUserId == identity!.userId &&
+              u.status == 'Completada' || u.status == 'Aprobada'
+          );
+        }),
         catchError((e: HttpErrorResponse) => {
           this.toastService.errorNotify('Error Obteniendo la lista tareas');
           return throwError(() => e);
         })
+      );
+
+    // catchError((e: HttpErrorResponse) => {
+    //   this.toastService.errorNotify('Error Obteniendo la lista tareas');
+    //   return throwError(() => e);
+    // })
+    //);
+  }
+  getTasksByUserId$(
+    userId: number,
+    filter: string = '',
+    sortOrder: StatusSort = ''
+  ) {
+    return this.http
+      .get<ITaskGetDTO[]>(`${this.baseUrl}/tasks`, {
+        params: {
+          userId: userId,
+          _sort: 'name',
+          _order: sortOrder,
+          q: filter,
+        },
+      })
+      .pipe(
+        map((tasks) =>
+          tasks.filter(
+            (t) =>
+              t.status == 'Pendiente' ||
+              t.status == 'En progreso' ||
+              t.status == 'Completada'
+          )
+        )
       );
   }
   createTask(data: ITaskCreateDTO) {

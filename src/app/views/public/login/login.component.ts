@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, EMPTY, tap } from 'rxjs';
 import { AppInfoService } from '../../../shared/services/app-info.service';
 import { MESSAGES_TEXT } from './message.const';
 import { AuthService } from '../../../core/auth/auth.service';
@@ -91,9 +91,10 @@ export class LoginComponent {
       .logIn(email, password)
       .pipe(
         catchError((e: HttpErrorResponse) => {
+          console.log(e);
           this.loginForm.enable();
           this.submitting = false;
-          this.errorMessage = MESSAGES_TEXT.CHECK_YOUR_CREDENTIALS;
+          this.errorMessage = e.error;
           return EMPTY;
         })
       )
