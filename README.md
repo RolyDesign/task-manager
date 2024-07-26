@@ -1,7 +1,7 @@
 # TaskManager
 
-Ojo:
-run => npm i -g json-server@0.17.4 .Con la version actual no corre el auth con json server
+Ojo Ojo:
+run => npm i -g json-server@0.17.4 Con la version actual no corre el auth con json server
 para levantar el server run => json-server-auth -w db.json
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
