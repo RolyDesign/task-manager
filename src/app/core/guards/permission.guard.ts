@@ -11,12 +11,12 @@ export const permissionGuard: CanActivateFn = (route, state) => {
   const identity = inject(IdentityService);
   const router = inject(Router);
   const toast = inject(ToastService);
-  const permissions: PERMISSION_ENUM[] = route.data[
+  const permissions: PERMISSION_ENUM = route.data[
     'permissions'
-  ] as PERMISSION_ENUM[];
+  ] as PERMISSION_ENUM;
 
   if (permissions.length) {
-    return identity.hasPermissions$(permissions).pipe(
+    return identity.hasPermission$(permissions).pipe(
       tap((res) => {
         if (!res) {
           toast.errorNotify('You do not have permission to access this route');

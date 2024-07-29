@@ -68,7 +68,7 @@ export class UserService {
     }
   }
   get userIdentity$() {
-    return this.userIdentitySubject.asObservable();
+    return this.userIdentitySubject.asObservable().pipe(take(1));
   }
   getUsers$(filter: string = '', sortOrder: StatusSort = 'asc') {
     return this.http
@@ -322,25 +322,23 @@ export class UserService {
                             })
                           )
                       )
+                    ).pipe(
+                      //update identity cache
+                      concatMap(() => {
+                        return this.userIdentity$.pipe(
+                          take(1),
+                          tap((res) => {
+                            if (res.userId == userId) {
+                              const u: IUserGetDTO = {
+                                ...user,
+                                id: userId,
+                              };
+                              this.setUserSelfIdentity$(u);
+                            }
+                          })
+                        );
+                      })
                     );
-                  })
-                );
-              }),
-              //update identity cache
-              switchMap(() => {
-                return this.userIdentity$.pipe(
-                  take(1),
-                  tap((res) => {
-                    if (res.userId == userId) {
-                      const u: IUserGetDTO = {
-                        ...user,
-                        id: userId,
-                        permissions: res.permissions,
-                        role: res.role,
-                      };
-
-                      this.setUserSelfIdentity$(u);
-                    }
                   })
                 );
               })

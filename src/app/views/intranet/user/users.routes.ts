@@ -11,7 +11,7 @@ export const USERS_ROUTES: Routes = [
     loadComponent: () =>
       import('./user-list.component').then((m) => m.UserListComponent),
     data: {
-      permissions: [PERMISSION_ENUM.users_list],
+      permissions: PERMISSION_ENUM.users_list,
     },
   },
   {
@@ -20,7 +20,7 @@ export const USERS_ROUTES: Routes = [
     loadComponent: () =>
       import('./user-create.component').then((m) => m.UserCreateComponent),
     data: {
-      permissions: [PERMISSION_ENUM.users_create],
+      permissions: PERMISSION_ENUM.users_create,
     },
   },
   {
@@ -30,7 +30,7 @@ export const USERS_ROUTES: Routes = [
     loadComponent: () =>
       import('./user-detail.component').then((m) => m.UserDetailComponent),
     data: {
-      permissions: [PERMISSION_ENUM.users_read],
+      permissions: PERMISSION_ENUM.users_read,
     },
   },
   {
@@ -40,7 +40,7 @@ export const USERS_ROUTES: Routes = [
     loadComponent: () =>
       import('./user-edit.component').then((m) => m.UserEditComponent),
     data: {
-      permissions: [PERMISSION_ENUM.users_update],
+      permissions: PERMISSION_ENUM.users_update,
     },
   },
 ];

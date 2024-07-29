@@ -4,37 +4,31 @@
       "name": "Fernando",
       "lastName": "Gonzalez",
       "userName": "admin",
-      "age": 35,
+      "age": 40,
       "email": "admin@gmail.com",
       "phoneNumber": "53565448",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$Np473NwgffKbSwqJsDdZvOS.u1LCqzcR/eD6j1vf5pGkUj5IbfGkO",
-      "role": "administrador",
+      "password": "$2a$10$2et9H8YGx8k.rXDQ5vFhOOFu.qb5Pop9vU5.8zo7LSKKCtbTLUvUO",
+      "role": "usuario",
       "permissions": [
         "tasks_create",
         "tasks_update",
         "tasks_delete",
         "tasks_list",
-        "tasks_read",
-        "tasks_approve",
-        "users_create",
-        "users_update",
-        "users_delete",
-        "users_list",
-        "users_read"
+        "tasks_read"
       ],
       "encPassword": "123@a",
       "id": 1
     },
     {
-      "name": "Pepe",
+      "name": "Lalo",
       "lastName": "Garcias",
       "userName": "lalo",
       "age": 45,
       "email": "lalo@gmail.com",
       "phoneNumber": "123456",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$W/3YdDiucMpDnrtG/eOh0.sX9W4KGnBkrig9htsZWV9PSZcbaKUAm",
+      "password": "$2a$10$3exWB7TtLZx3Fzbj4XWu6uL3r3gDykwtN07IuIYhY6SH8sPjYS3NW",
       "role": "usuario",
       "permissions": [
         "tasks_create",
@@ -47,14 +41,14 @@
       "id": 2
     },
     {
-      "name": "admin2",
-      "lastName": "admin2",
-      "userName": "admin2",
+      "name": "Rafael",
+      "lastName": "Mendes",
+      "userName": "Reafa",
       "age": 42,
       "email": "admin2@gmail.com",
       "phoneNumber": "56565656",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$XJzamCwn2KjF7WCY/0AjrOBQxSaX1ZAXSNcKrv1nCmVmtXIOCENwO",
+      "password": "$2a$10$CyH1qxIB8cNpBCeTZNsTdeshY8dFrV52gwjGqdpuHA8C8CbuYAmHK",
       "role": "administrador",
       "permissions": [
         "tasks_create",
@@ -100,9 +94,9 @@
       "status": "En progreso",
       "userId": 2,
       "approvedUserId": 1,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 1
     },
     {
@@ -111,9 +105,9 @@
       "status": "Pendiente",
       "userId": 2,
       "approvedUserId": 1,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 2
     },
     {
@@ -122,9 +116,9 @@
       "status": "Pendiente",
       "userId": 2,
       "approvedUserId": 3,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 3
     },
     {
@@ -133,9 +127,9 @@
       "status": "Pendiente",
       "userId": 2,
       "approvedUserId": 3,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 4
     },
     {
@@ -144,9 +138,9 @@
       "status": "Pendiente",
       "userId": 2,
       "approvedUserId": 3,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 5
     },
     {
@@ -155,9 +149,9 @@
       "status": "Completada",
       "userId": 2,
       "approvedUserId": 1,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 6
     },
     {
@@ -166,9 +160,9 @@
       "status": "En progreso",
       "userId": 2,
       "approvedUserId": 1,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 7
     },
     {
@@ -177,9 +171,9 @@
       "status": "Pendiente",
       "userId": 2,
       "approvedUserId": 3,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 8
     },
     {
@@ -188,9 +182,9 @@
       "status": "Pendiente",
       "userId": 2,
       "approvedUserId": 1,
-      "initialsName": "PG",
+      "initialsName": "LG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Pepe Garcias",
+      "creatorName": "Lalo Garcias",
       "id": 9
     },
     {
@@ -243,9 +237,9 @@
       "status": "En progreso",
       "userId": 3,
       "approvedUserId": 1,
-      "initialsName": "AA",
+      "initialsName": "RM",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "admin2 admin2",
+      "creatorName": "Rafael Mendes",
       "id": 14
     },
     {
@@ -254,9 +248,9 @@
       "status": "Completada",
       "userId": 3,
       "approvedUserId": 1,
-      "initialsName": "AA",
+      "initialsName": "RM",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "admin2 admin2",
+      "creatorName": "Rafael Mendes",
       "id": 15
     },
     {
@@ -265,9 +259,9 @@
       "status": "En progreso",
       "userId": 3,
       "approvedUserId": 3,
-      "initialsName": "AA",
+      "initialsName": "RM",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "admin2 admin2",
+      "creatorName": "Rafael Mendes",
       "id": 16
     },
     {
@@ -276,9 +270,9 @@
       "status": "Pendiente",
       "userId": 3,
       "approvedUserId": 3,
-      "initialsName": "AA",
+      "initialsName": "RM",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "admin2 admin2",
+      "creatorName": "Rafael Mendes",
       "id": 17
     },
     {
@@ -287,9 +281,9 @@
       "status": "Completada",
       "userId": 3,
       "approvedUserId": 1,
-      "initialsName": "AA",
+      "initialsName": "RM",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "admin2 admin2",
+      "creatorName": "Rafael Mendes",
       "id": 18
     },
     {

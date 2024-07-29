@@ -8,24 +8,11 @@ import { of, switchMap, take } from 'rxjs';
 })
 export class IdentityService {
   private userService = inject(UserService);
-  hasPermission$(perrmission: PERMISSION_ENUM) {
+  hasPermission$(permission: PERMISSION_ENUM) {
     return this.userService.userIdentity$.pipe(
+      take(1),
       switchMap((ui) => {
-        return of(ui!.permissions.includes(perrmission));
-      })
-    );
-  }
-  hasPermissions$(permissions: PERMISSION_ENUM[]) {
-    return this.userService.userIdentity$.pipe(
-      switchMap((ui) => {
-        let result = true;
-        for (let index = 0; index < permissions.length; index++) {
-          if (!ui!.permissions.includes(permissions[index])) {
-            result = false;
-            break;
-          }
-        }
-        return of(result);
+        return of(ui.permissions.includes(permission));
       })
     );
   }
