@@ -8,7 +8,7 @@
       "email": "admin@gmail.com",
       "phoneNumber": "53565448",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$vL.5Zt0P9OLuz0DJU2IKS..OVfg99lhU.6PsrtQLyvfTpZtQipz3a",
+      "password": "$2a$10$vlnlLJA0UQf8FThhTF899e3XEtvmwoAt40vUua2zT0Ur/d/Kp08E2",
       "role": "administrador",
       "permissions": [
         "tasks_create",
@@ -23,7 +23,6 @@
         "users_list",
         "users_read"
       ],
-      "initailsName": true,
       "encPassword": "123@a",
       "id": 1
     },
@@ -44,7 +43,6 @@
         "tasks_list",
         "tasks_read"
       ],
-      "initailsName": true,
       "encPassword": "123@a",
       "id": 2
     },
@@ -317,8 +315,8 @@
       "id": 20
     },
     {
-      "name": "sdfdf",
-      "description": "sdfdsdfdf",
+      "name": "sdfdf ert ertert ert erert ert erertert ert ertertert ert ertertert ert ert ertertert ert ",
+      "description": "sdfdsdfdf er ert ert ",
       "status": "Pendiente",
       "userId": 4,
       "approvedUserId": 3,

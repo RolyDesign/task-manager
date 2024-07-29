@@ -284,6 +284,7 @@ export class UserService {
       .put<never>(`${environment.API_URL}/users/${userId}`, user)
       .pipe(
         tap(() => {
+          console.log(user);
           this.toastService.successNotify(
             `Usuario Actualizado satisfactoriamente`
           );
@@ -339,6 +340,7 @@ export class UserService {
                         permissions: res.permissions,
                         role: res.role,
                       };
+
                       this.setUserSelfIdentity$(u);
                     }
                   })

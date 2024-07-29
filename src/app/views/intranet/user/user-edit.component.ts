@@ -120,7 +120,7 @@ export class UserEditComponent {
   }
   onEdit() {
     const formValue = { ...this.userEditForm.value };
-    formValue.initailsName = delete formValue.confirmPassword;
+    delete formValue.confirmPassword;
     this.userEditForm.disable();
     this.userService
       .updateUser$(this.user.id, formValue)
