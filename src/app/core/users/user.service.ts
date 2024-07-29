@@ -202,23 +202,22 @@ export class UserService {
   }) {
     return this.userIdentity$.pipe(
       switchMap((res) => {
-        return this.getUsers$().pipe(
-          switchMap((users) => {
-            const currentUser = users.find((u) => u.id == res!.userId);
-            if (currentUser?.password == data.currentPassword) {
-              currentUser!.password = data.newPassword;
-              return this.http.put<never>(
-                `${environment.API_URL}/users/${res!.userId}`,
-                currentUser
+        return this.getUserById$(res.userId).pipe(
+          switchMap((user) => {
+            if (data.currentPassword !== user.encPassword) {
+              return throwError(
+                () =>
+                  new HttpErrorResponse({
+                    error: 'Error cambiando su contrasena',
+                    status: 400,
+                  })
               );
             }
-            return throwError(
-              () =>
-                new HttpErrorResponse({
-                  status: 400,
-                  error:
-                    'Error al cambiar su contraseña,Verifique su contraseña actual',
-                })
+            user.password = data.newPassword;
+            user.encPassword = data.newPassword;
+            return this.http.put<never>(
+              `${environment.API_URL}/users/${res!.userId}`,
+              user
             );
           }),
           tap(() =>
@@ -284,7 +283,6 @@ export class UserService {
       .put<never>(`${environment.API_URL}/users/${userId}`, user)
       .pipe(
         tap(() => {
-          console.log(user);
           this.toastService.successNotify(
             `Usuario Actualizado satisfactoriamente`
           );

@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "name": "Rolando",
+      "name": "Fernando",
       "lastName": "Gonzalez",
       "userName": "admin",
       "age": 35,
       "email": "admin@gmail.com",
       "phoneNumber": "53565448",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$vlnlLJA0UQf8FThhTF899e3XEtvmwoAt40vUua2zT0Ur/d/Kp08E2",
+      "password": "$2a$10$Np473NwgffKbSwqJsDdZvOS.u1LCqzcR/eD6j1vf5pGkUj5IbfGkO",
       "role": "administrador",
       "permissions": [
         "tasks_create",
@@ -34,7 +34,7 @@
       "email": "lalo@gmail.com",
       "phoneNumber": "123456",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$enpblwcJ4zUyBrxyegHXyeBZsRCNQHMknHgwiBwQSQAGQeclz6d9u",
+      "password": "$2a$10$W/3YdDiucMpDnrtG/eOh0.sX9W4KGnBkrig9htsZWV9PSZcbaKUAm",
       "role": "usuario",
       "permissions": [
         "tasks_create",
@@ -54,7 +54,7 @@
       "email": "admin2@gmail.com",
       "phoneNumber": "56565656",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$qJz/Z3zt/uY3FUwviOHCkuxm7I6fw.POAgRnuYP3Pahh8wHYh1hKu",
+      "password": "$2a$10$XJzamCwn2KjF7WCY/0AjrOBQxSaX1ZAXSNcKrv1nCmVmtXIOCENwO",
       "role": "administrador",
       "permissions": [
         "tasks_create",
@@ -73,14 +73,14 @@
       "id": 3
     },
     {
-      "email": "user2@gmail.com",
-      "password": "$2a$10$zGf9cjfbLoRatNWB6vZ4euiVjn/ARs9o0ue.x8hbnmIk.i0hmjTfa",
       "name": "user segundo",
       "lastName": "user2",
       "userName": "user2",
       "age": 45,
+      "email": "user2@gmail.com",
       "phoneNumber": "898989",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
+      "password": "$2a$10$AQCpCyiqjln68Mo5ssiJtu1JqkCQZ0g9DmjVH6AdCtjN3cBT6Y7m6",
       "role": "usuario",
       "permissions": [
         "tasks_create",
@@ -199,9 +199,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "RG",
+      "initialsName": "FG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Rolando Gonzalez",
+      "creatorName": "Fernando Gonzalez",
       "id": 10
     },
     {
@@ -210,9 +210,9 @@
       "status": "En progreso",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "RG",
+      "initialsName": "FG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Rolando Gonzalez",
+      "creatorName": "Fernando Gonzalez",
       "id": 11
     },
     {
@@ -221,9 +221,9 @@
       "status": "Completada",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "RG",
+      "initialsName": "FG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Rolando Gonzalez",
+      "creatorName": "Fernando Gonzalez",
       "id": 12
     },
     {
@@ -232,9 +232,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "RG",
+      "initialsName": "FG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Rolando Gonzalez",
+      "creatorName": "Fernando Gonzalez",
       "id": 13
     },
     {
@@ -298,9 +298,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 3,
-      "initialsName": "RG",
+      "initialsName": "FG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "Rolando Gonzalez",
+      "creatorName": "Fernando Gonzalez",
       "id": 19
     },
     {
@@ -309,9 +309,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "RG",
+      "initialsName": "FG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Rolando Gonzalez",
+      "creatorName": "Fernando Gonzalez",
       "id": 20
     },
     {
