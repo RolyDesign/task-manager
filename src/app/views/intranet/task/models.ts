@@ -1,3 +1,5 @@
+import { IUserGetDTO } from '../../../core/users/model';
+
 export type TaskStatus =
   | 'Pendiente'
   | 'En progreso'
@@ -11,6 +13,8 @@ export interface ITaskGetDTO {
   userId: number;
   status: TaskStatus;
   approvedUserId: number;
+  approvedUser: IUserGetDTO;
+  creatorUser: IUserGetDTO;
   approvedUserName: number;
   creatorName: string;
   initialsName: string;

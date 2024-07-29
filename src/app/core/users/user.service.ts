@@ -6,12 +6,19 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   BehaviorSubject,
   catchError,
+  combineLatest,
+  concat,
+  concatMap,
+  delay,
+  forkJoin,
+  from,
   map,
   Observable,
   of,
   ReplaySubject,
   Subject,
   switchMap,
+  take,
   tap,
   throwError,
 } from 'rxjs';
@@ -34,6 +41,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { PERMISSION_ENUM, ROLE_ENUM } from '../../shared/metadata';
+import { ITaskGetDTO } from '../../views/intranet/task/models';
 
 @Injectable({
   providedIn: 'root',
@@ -116,21 +124,11 @@ export class UserService {
         })
       );
   }
-  getUserSelf$(id: number): Observable<IGetUserSelfDTO> {
-    return this.http
-      .get<IGetUserSelfDTO>(`${environment.API_URL}/users/${id}`)
-      .pipe(
-        catchError((e: HttpErrorResponse) => {
-          this.toastService.errorNotify(`Error su usuario`);
-          return throwError(() => e);
-        })
-      );
-  }
   updateUserSelf$(userId: number, user: IUpdateUserSelfDTO) {
-    return this.getUsers$().pipe(
+    return this.getUserById$(userId).pipe(
       switchMap((res) => {
         const currentUser: IUserGetDTO = {
-          ...res.find((u) => u.id == userId)!,
+          ...res,
           ...user,
         };
         return this.http
@@ -140,8 +138,51 @@ export class UserService {
               this.toastService.successNotify(
                 'Usuario actualizado satisfactoriamente'
               );
+              //update identity cache
               this.setUserSelfIdentity$(currentUser);
             }),
+            //update task userCreator and InitialsName
+            switchMap(() => {
+              return this.http
+                .get<ITaskGetDTO[]>(`${environment.API_URL}/tasks`, {
+                  params: {
+                    userId,
+                  },
+                })
+                .pipe(
+                  switchMap((res) => {
+                    const batchUpdate: ITaskGetDTO[] = res.map((t) => {
+                      const taskUpdated: ITaskGetDTO = {
+                        ...t,
+                        creatorName: user.name.trim() + user.lastName.trim(),
+                        initialsName:
+                          user.name.trim().slice(0, 1).toUpperCase() +
+                          user.lastName.trim().slice(0, 1).toUpperCase(),
+                      };
+                      return taskUpdated;
+                    });
+                    return of(batchUpdate).pipe(
+                      concatMap((ts) => {
+                        return forkJoin(
+                          ts.map((t) =>
+                            this.http
+                              .put(`${environment.API_URL}/tasks/${t.id}`, t)
+                              .pipe(
+                                catchError((e) => {
+                                  this.toastService.errorNotify(
+                                    `Error actualizando la tarea ${t.name}`
+                                  );
+                                  return throwError(() => e);
+                                })
+                              )
+                          )
+                        );
+                      })
+                    );
+                  })
+                );
+            }),
+
             catchError((e: HttpErrorResponse) => {
               this.toastService.errorNotify(
                 `Erro al actualizar el usuario ${
@@ -243,8 +284,66 @@ export class UserService {
       .pipe(
         tap(() => {
           this.toastService.successNotify(
-            `Usuario Aactualizado satisfactoriamente`
+            `Usuario Actualizado satisfactoriamente`
           );
+        }),
+        //update task userCreator and InitialsName
+        switchMap((res) => {
+          return this.http
+            .get<ITaskGetDTO[]>(`${environment.API_URL}/tasks`, {
+              params: {
+                userId,
+              },
+            })
+            .pipe(
+              switchMap((res) => {
+                const batchUpdate: ITaskGetDTO[] = res.map((t) => {
+                  const taskUpdated: ITaskGetDTO = {
+                    ...t,
+                    creatorName: user.name.trim() + user.lastName.trim(),
+                    initialsName:
+                      user.name.trim().slice(0, 1).toUpperCase() +
+                      user.lastName.trim().slice(0, 1).toUpperCase(),
+                  };
+                  return taskUpdated;
+                });
+                return of(batchUpdate).pipe(
+                  concatMap((ts) => {
+                    return forkJoin(
+                      ts.map((t) =>
+                        this.http
+                          .put(`${environment.API_URL}/tasks/${t.id}`, t)
+                          .pipe(
+                            catchError((e) => {
+                              this.toastService.errorNotify(
+                                `Error actualizando la tarea ${t.name}`
+                              );
+                              return throwError(() => e);
+                            })
+                          )
+                      )
+                    );
+                  })
+                );
+              }),
+              //update identity cache
+              switchMap(() => {
+                return this.userIdentity$.pipe(
+                  take(1),
+                  tap((res) => {
+                    if (res.userId == userId) {
+                      const u: IUserGetDTO = {
+                        ...user,
+                        id: userId,
+                        permissions: res.permissions,
+                        role: res.role,
+                      };
+                      this.setUserSelfIdentity$(u);
+                    }
+                  })
+                );
+              })
+            );
         }),
         catchError((e: HttpErrorResponse) => {
           this.toastService.errorNotify(`Error actualizando el usuario`);

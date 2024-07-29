@@ -2,7 +2,17 @@ import { inject, Injectable } from '@angular/core';
 import { UserService } from '../../../core/users/user.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { catchError, identity, map, switchMap, tap, throwError } from 'rxjs';
+import {
+  catchError,
+  combineLatest,
+  identity,
+  map,
+  of,
+  scan,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { ITaskCreateDTO, ITaskGetDTO, ITaskUpdateDTO } from './models';
 import { StatusSort } from '../../../shared/components/sort/sort.component';
 import { ToastService } from '../../../shared/services/toast.service';

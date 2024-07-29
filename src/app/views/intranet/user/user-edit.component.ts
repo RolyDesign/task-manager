@@ -16,7 +16,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 
-import { catchError, EMPTY } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  debounceTime,
+  EMPTY,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { IUserGetDTO } from '../../../core/users/model';
 import { UserService } from '../../../core/users/user.service';
 import { confirmedValidator } from '../../../shared/custom-validators/confirmed-validators';
