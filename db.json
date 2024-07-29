@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "name": "Fernando",
+      "name": "Rolando",
       "lastName": "Gonzalez",
       "userName": "admin",
       "age": 35,
       "email": "admin@gmail.com",
       "phoneNumber": "53565448",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$7ArBEFD1DjahBIxSse7P4Od7O/X7JBNdnix88BXNwSzr6d27cLeGG",
+      "password": "$2a$10$vL.5Zt0P9OLuz0DJU2IKS..OVfg99lhU.6PsrtQLyvfTpZtQipz3a",
       "role": "administrador",
       "permissions": [
         "tasks_create",
@@ -35,7 +35,7 @@
       "email": "lalo@gmail.com",
       "phoneNumber": "123456",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$4ouCp/C8pQcTMf05oVAroucYq9BVak6lztVUYxWtUHczcDY9MDgCu",
+      "password": "$2a$10$enpblwcJ4zUyBrxyegHXyeBZsRCNQHMknHgwiBwQSQAGQeclz6d9u",
       "role": "usuario",
       "permissions": [
         "tasks_create",
@@ -104,7 +104,7 @@
       "approvedUserId": 1,
       "initialsName": "PG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 1
     },
     {
@@ -115,7 +115,7 @@
       "approvedUserId": 1,
       "initialsName": "PG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 2
     },
     {
@@ -126,7 +126,7 @@
       "approvedUserId": 3,
       "initialsName": "PG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 3
     },
     {
@@ -137,7 +137,7 @@
       "approvedUserId": 3,
       "initialsName": "PG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 4
     },
     {
@@ -148,7 +148,7 @@
       "approvedUserId": 3,
       "initialsName": "PG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 5
     },
     {
@@ -159,7 +159,7 @@
       "approvedUserId": 1,
       "initialsName": "PG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 6
     },
     {
@@ -170,7 +170,7 @@
       "approvedUserId": 1,
       "initialsName": "PG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 7
     },
     {
@@ -181,7 +181,7 @@
       "approvedUserId": 3,
       "initialsName": "PG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 8
     },
     {
@@ -192,18 +192,18 @@
       "approvedUserId": 1,
       "initialsName": "PG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "PepeGarcias",
+      "creatorName": "Pepe Garcias",
       "id": 9
     },
     {
       "name": "There are many variations of passages of Lorem Ipsum available, but the",
       "description": "need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat",
-      "status": "Completada",
+      "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "FernandoGonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 10
     },
     {
@@ -212,9 +212,9 @@
       "status": "En progreso",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "FernandoGonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 11
     },
     {
@@ -223,20 +223,20 @@
       "status": "Completada",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "FernandoGonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 12
     },
     {
       "name": "The standard chunk of Lorem Ipsum used since the 1500s is reproduced",
       "description": "the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered ",
-      "status": "En progreso",
+      "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "FernandoGonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 13
     },
     {
@@ -297,12 +297,12 @@
     {
       "name": "wererewer",
       "description": "werewr",
-      "status": "Completada",
+      "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 3,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "FernandoGonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 19
     },
     {
@@ -311,9 +311,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "FernandoGonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 20
     }
   ]
