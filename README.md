@@ -17,6 +17,10 @@ Si un user con permiso de elimar user quiere eliminar su propio user se debio ha
 
 cuando se actualiza un user se actualiza ademas el lote de tareas que pertenecen a este user esto con una api real no se implementaba en el cliente pero por cuestiones de funcionalidad de la app lo implemente para que cuando se actualize un user se actualicen ademas las tareas relacionadas espesificamente los campos UserCreator y InitialsName ademas si el usuario que se desea actualizar es el mismo que esta logueado se actualiza ademas de el user y sus tareas el identity cache en local storage para mantener la sincronizacion , esto susede cuando se edita el perfil que es lo mismo que actualizar un user solo que es el update del userSelf.
 
+### Caso Actualizar user u cambiarle el role
+
+no se esta manejando el caso de que un user admin se cambie el role a user (se deberia redirigir al user a login para que inicie session nuevamente )
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
 
 ## Development server

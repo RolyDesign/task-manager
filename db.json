@@ -1,21 +1,27 @@
 {
   "users": [
     {
-      "name": "Fernando",
+      "name": "Rolando",
       "lastName": "Gonzalez",
       "userName": "admin",
       "age": 40,
       "email": "admin@gmail.com",
       "phoneNumber": "53565448",
       "address": "Calbario,1702c altos,calzada managua,/calle parque y calvario",
-      "password": "$2a$10$2et9H8YGx8k.rXDQ5vFhOOFu.qb5Pop9vU5.8zo7LSKKCtbTLUvUO",
-      "role": "usuario",
+      "password": "$2a$10$x8PB1fsOWXXWqF90I3ZfvewdhNojI8iXs7eL4VGMgEbpWbFnRYHVO",
+      "role": "administrador",
       "permissions": [
         "tasks_create",
         "tasks_update",
         "tasks_delete",
         "tasks_list",
-        "tasks_read"
+        "tasks_read",
+        "tasks_approve",
+        "users_create",
+        "users_update",
+        "users_delete",
+        "users_list",
+        "users_read"
       ],
       "encPassword": "123@a",
       "id": 1
@@ -193,9 +199,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Fernando Gonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 10
     },
     {
@@ -204,9 +210,9 @@
       "status": "En progreso",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Fernando Gonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 11
     },
     {
@@ -215,9 +221,9 @@
       "status": "Completada",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Fernando Gonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 12
     },
     {
@@ -226,9 +232,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Fernando Gonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 13
     },
     {
@@ -292,9 +298,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 3,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "admin2 admin2",
-      "creatorName": "Fernando Gonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 19
     },
     {
@@ -303,9 +309,9 @@
       "status": "Pendiente",
       "userId": 1,
       "approvedUserId": 1,
-      "initialsName": "FG",
+      "initialsName": "RG",
       "approvedUserName": "Rolando Gonzalez",
-      "creatorName": "Fernando Gonzalez",
+      "creatorName": "Rolando Gonzalez",
       "id": 20
     },
     {
