@@ -154,7 +154,8 @@ export class UserService {
                     const batchUpdate: ITaskGetDTO[] = res.map((t) => {
                       const taskUpdated: ITaskGetDTO = {
                         ...t,
-                        creatorName: user.name.trim() + user.lastName.trim(),
+                        creatorName:
+                          user.name.trim() + ' ' + user.lastName.trim(),
                         initialsName:
                           user.name.trim().slice(0, 1).toUpperCase() +
                           user.lastName.trim().slice(0, 1).toUpperCase(),

@@ -76,8 +76,8 @@
     },
     {
       "email": "user2@gmail.com",
-      "password": "$2a$10$PYxThOzpFiZHmBaYVcpqueGuM0zLOQYdxK72hvsnBkkKGd6jQspxi",
-      "name": "user2",
+      "password": "$2a$10$zGf9cjfbLoRatNWB6vZ4euiVjn/ARs9o0ue.x8hbnmIk.i0hmjTfa",
+      "name": "user segundo",
       "lastName": "user2",
       "userName": "user2",
       "age": 45,
@@ -315,6 +315,17 @@
       "approvedUserName": "Rolando Gonzalez",
       "creatorName": "Rolando Gonzalez",
       "id": 20
+    },
+    {
+      "name": "sdfdf",
+      "description": "sdfdsdfdf",
+      "status": "Pendiente",
+      "userId": 4,
+      "approvedUserId": 3,
+      "initialsName": "UU",
+      "approvedUserName": "admin2 admin2",
+      "creatorName": "user segundo user2",
+      "id": 21
     }
   ]
 }
