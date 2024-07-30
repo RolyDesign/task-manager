@@ -44,6 +44,7 @@ export function authInterceptor(
     authService.exitApp();
     return EMPTY;
   }
+
   const reqClone = authService.addTokenHeader(req);
   return next(reqClone);
 }

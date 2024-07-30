@@ -81,15 +81,18 @@ export class TaskComponent {
           adminUsers: resolveData.adminUsers,
           tasks: resolveData.tasks,
         };
-        this.myAssignedTask = {
-          user: resolveData.user,
-          adminUsers: resolveData.adminUsers,
-          tasksSelfToApprove: resolveData.tasksSelfToApprove,
-        };
-        this.totalToApprove.set(
-          resolveData.tasksSelfToApprove.filter((t) => t.status == 'Completada')
-            .length
-        );
+        if (resolveData.tasksSelfToApprove) {
+          this.myAssignedTask = {
+            user: resolveData.user,
+            adminUsers: resolveData.adminUsers,
+            tasksSelfToApprove: resolveData.tasksSelfToApprove,
+          };
+          this.totalToApprove.set(
+            resolveData.tasksSelfToApprove.filter(
+              (t) => t.status == 'Completada'
+            ).length
+          );
+        }
       });
     }
   }

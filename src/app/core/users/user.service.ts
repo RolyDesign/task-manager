@@ -10,6 +10,7 @@ import {
   concat,
   concatMap,
   delay,
+  EMPTY,
   forkJoin,
   from,
   map,
@@ -68,7 +69,7 @@ export class UserService {
     }
   }
   get userIdentity$() {
-    return this.userIdentitySubject.asObservable().pipe(take(1));
+    return this.userIdentitySubject.asObservable();
   }
   getUsers$(filter: string = '', sortOrder: StatusSort = 'asc') {
     return this.http
@@ -164,26 +165,28 @@ export class UserService {
                     });
                     return of(batchUpdate).pipe(
                       concatMap((ts) => {
-                        return forkJoin(
-                          ts.map((t) =>
-                            this.http
-                              .put(`${environment.API_URL}/tasks/${t.id}`, t)
-                              .pipe(
-                                catchError((e) => {
-                                  this.toastService.errorNotify(
-                                    `Error actualizando la tarea ${t.name}`
-                                  );
-                                  return throwError(() => e);
-                                })
-                              )
-                          )
-                        );
+                        if (ts.length) {
+                          return forkJoin(
+                            ts.map((t) =>
+                              this.http
+                                .put(`${environment.API_URL}/tasks/${t.id}`, t)
+                                .pipe(
+                                  catchError((e) => {
+                                    this.toastService.errorNotify(
+                                      `Error actualizando la tarea ${t.name}`
+                                    );
+                                    return throwError(() => e);
+                                  })
+                                )
+                            )
+                          ).pipe();
+                        }
+                        return of(false);
                       })
                     );
                   })
                 );
             }),
-
             catchError((e: HttpErrorResponse) => {
               this.toastService.errorNotify(
                 `Erro al actualizar el usuario ${
@@ -309,41 +312,44 @@ export class UserService {
                 });
                 return of(batchUpdate).pipe(
                   concatMap((ts) => {
-                    return forkJoin(
-                      ts.map((t) =>
-                        this.http
-                          .put(`${environment.API_URL}/tasks/${t.id}`, t)
-                          .pipe(
-                            catchError((e) => {
-                              this.toastService.errorNotify(
-                                `Error actualizando la tarea ${t.name}`
-                              );
-                              return throwError(() => e);
-                            })
-                          )
-                      )
-                    ).pipe(
-                      //update identity cache
-                      concatMap(() => {
-                        return this.userIdentity$.pipe(
-                          take(1),
-                          tap((res) => {
-                            if (res.userId == userId) {
-                              const u: IUserGetDTO = {
-                                ...user,
-                                id: userId,
-                              };
-                              this.setUserSelfIdentity$(u);
-                            }
-                          })
-                        );
-                      })
-                    );
+                    if (ts.length) {
+                      return forkJoin(
+                        ts.map((t) =>
+                          this.http
+                            .put(`${environment.API_URL}/tasks/${t.id}`, t)
+                            .pipe(
+                              catchError((e) => {
+                                this.toastService.errorNotify(
+                                  `Error actualizando la tarea ${t.name}`
+                                );
+                                return throwError(() => e);
+                              })
+                            )
+                        )
+                      ).pipe();
+                    }
+                    return of(false);
                   })
                 );
               })
             );
         }),
+        //update identity cache
+        switchMap(() => {
+          return this.userIdentity$.pipe(
+            take(1),
+            tap((res) => {
+              if (res.userId == userId) {
+                const u: IUserGetDTO = {
+                  ...user,
+                  id: userId,
+                };
+                this.setUserSelfIdentity$(u);
+              }
+            })
+          );
+        }),
+
         catchError((e: HttpErrorResponse) => {
           this.toastService.errorNotify(`Error actualizando el usuario`);
           return throwError(() => e);

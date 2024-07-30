@@ -18,6 +18,7 @@ export const permissionGuard: CanActivateFn = (route, state) => {
   if (permissions.length) {
     return identity.hasPermission$(permissions).pipe(
       tap((res) => {
+        console.log(res, permissions);
         if (!res) {
           toast.errorNotify('You do not have permission to access this route');
           router.navigate(['welcome']);

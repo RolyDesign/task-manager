@@ -47,7 +47,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([
         loaderInterceptor,
-        authInterceptor,
+        //authInterceptor,
         // errorApiInterceptor,
       ])
     ),

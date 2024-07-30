@@ -10,7 +10,6 @@ export class IdentityService {
   private userService = inject(UserService);
   hasPermission$(permission: PERMISSION_ENUM) {
     return this.userService.userIdentity$.pipe(
-      take(1),
       switchMap((ui) => {
         return of(ui.permissions.includes(permission));
       })

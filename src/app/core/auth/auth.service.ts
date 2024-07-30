@@ -85,21 +85,44 @@ export class AuthService {
   }
   //Simulando login
   logIn(email: string, password: string) {
-    return this.http
-      .post<any>(`${this.baseUrl}/signin`, { email, password })
-      .pipe(
-        switchMap((res) => {
-          const accessToken = res.accessToken;
+    // return this.http
+    //   .post<any>(`${this.baseUrl}/signin`, { email, password })
+    //   .pipe(
+    //     switchMap((res) => {
+    //       const accessToken = res.accessToken;
+    //       this.setSession({
+    //         accessToken: accessToken,
+    //       });
+    //       return of(this.userService.setUserSelfIdentity$(res.user));
+    //     }),
+    //     catchError((e: HttpErrorResponse) => {
+    //       this.toastService.errorNotify('Chequea sus creadenciales');
+    //       return throwError(() => e);
+    //     })
+    //   );
+    return this.userService.getUserByEmail$(email).pipe(
+      switchMap((users) => {
+        if (!users.length) {
+          return throwError(
+            () => new HttpErrorResponse({ error: 'Chequee sus credenciales' })
+          );
+        }
+        if (users[0].password == password) {
+          const accessToken = `token simulado para el user ${email}`;
           this.setSession({
             accessToken: accessToken,
           });
-          return of(this.userService.setUserSelfIdentity$(res.user));
-        }),
-        catchError((e: HttpErrorResponse) => {
-          this.toastService.errorNotify('Chequea sus creadenciales');
-          return throwError(() => e);
-        })
-      );
+          return of(this.userService.setUserSelfIdentity$(users[0]));
+        }
+        return throwError(
+          () => new HttpErrorResponse({ error: 'Chequee sus credenciales' })
+        );
+      }),
+      catchError((e: HttpErrorResponse) => {
+        this.toastService.errorNotify(e.error);
+        return throwError(() => e);
+      })
+    );
   }
   updateToken(newToken: string) {
     const session = this.getSession()!;
@@ -131,7 +154,8 @@ export class AuthService {
       ],
       encPassword: partialUser.password,
     };
-    return this.http.post(`${environment.API_URL}/register`, user).pipe(
+    console.log(user);
+    return this.http.post(`${environment.API_URL}/users`, user).pipe(
       catchError((e: HttpErrorResponse) => {
         this.toastService.errorNotify(e.error);
         return throwError(() => e);
