@@ -2,8 +2,8 @@
 
 ## Ojo
 
-run => npm i -g json-server@0.17.4 Con la version actual no corre el auth con json server
-para levantar el server run => json-server-auth -w db.json
+run => npm i -g json-server@0.17.4
+para levantar el server run => json-server -w db.json
 
 ## Caracteristicas
 
